@@ -48,8 +48,16 @@
       <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.2.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -65,6 +73,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -150,22 +170,79 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
+    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\AudioViewModel.cs" />
+    <Compile Include="Models\ScoreViewModel.cs" />
+    <Compile Include="Models\TrackViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Assets\Client\ajax.googleapis.com\ajax\libs\jquery\1.12.0\jquery.min.js" />
+    <Content Include="Assets\Client\images\bar-back.png" />
+    <Content Include="Assets\Client\images\bar-marker.gif" />
+    <Content Include="Assets\Client\images\button.css" />
+    <Content Include="Assets\Client\images\button.gif" />
+    <Content Include="Assets\Client\images\choose-mode\blankmode.gif" />
+    <Content Include="Assets\Client\images\choose-mode\correctmode.gif" />
+    <Content Include="Assets\Client\images\choose-mode\fullmode.gif" />
+    <Content Include="Assets\Client\images\choose-mode\quickmode.gif" />
+    <Content Include="Assets\Client\images\choose-mode\sbbody-l.gif" />
+    <Content Include="Assets\Client\images\choose-mode\sbbody-r.gif" />
+    <Content Include="Assets\Client\images\choose-mode\sbhead-l.gif" />
+    <Content Include="Assets\Client\images\choose-mode\sbhead-r.gif" />
+    <Content Include="Assets\Client\images\colorbar.png" />
+    <Content Include="Assets\Client\images\icons\user_add.gif" />
+    <Content Include="Assets\Client\images\log_in_facebook.png" />
+    <Content Include="Assets\Client\images\newstoday-9abba7d4a55288681f5a017657d499a582e65046a79488799fe51e2a540da6a1.css" />
+    <Content Include="Assets\Client\images\numbers-demo.gif" />
+    <Content Include="Assets\Client\images\point.gif" />
+    <Content Include="Assets\Client\images\scriptbg.png" />
+    <Content Include="Assets\Client\images\slider\luna\handle.horizontal.hover.png" />
+    <Content Include="Assets\Client\images\slider\luna\handle.horizontal.png" />
+    <Content Include="Assets\Client\images\slider\luna\handle.vertical.hover.png" />
+    <Content Include="Assets\Client\images\slider\luna\handle.vertical.png" />
+    <Content Include="Assets\Client\images\slider\luna\luna-6c60027ba1c0692083382645ec63ec2ca140079d6235a75d6ac3c700b714a30b.css" />
+    <Content Include="Assets\Client\images\style2-5748d3b8b5df62669251ccb189b97dd8286b3d21cb3689ae568a3f409a855871.css" />
+    <Content Include="Assets\Client\images\title-2018-08.png" />
+    <Content Include="Assets\Client\images\vendor\animate-ff2420236a790440f43c26441f6d0966af5f06cb4cb6e1a3cc6c1304c21cc3ed.css" />
+    <Content Include="Assets\Client\images\vendor\bootstrap\css\bootstrap.min-e383ed4c10ef3397e02f3ee8695074066ba694caa4a627589566c6af45d589b8.css" />
+    <Content Include="Assets\Client\images\vendor\bootstrap\js\bootstrap.min-77cce082cfd274b236b5f0787442704609e19217999ea4e087abdfe88ffd001b.js" />
+    <Content Include="Assets\Client\images\vendor\bootstrap\js\popper.min-998e8fe8c732be8c218cae0105f901d10d1baf1efa5df3549703fefeef33a809.js" />
+    <Content Include="Assets\Client\images\vendor\custom-icon\fonts\icobase81a4.svg" />
+    <Content Include="Assets\Client\images\vendor\custom-icon\style-8863dc08d74dd80dd8eec3cb46270de3ffd0fbd61e0958153e6c2084e5c6e333.css" />
+    <Content Include="Assets\Client\images\vendor\flexmenu.min-68de81a1cc96e2d617610aa1c8a4f8195d43e8b96688b4d8af575a5e43d09b43.js" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\css\font-awesome.min-761e6a24bdb226a30c2a5788d620299b30fa11b4b050122ffc270b2f187e9c71.css" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfont3e6e.html" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="Assets\Client\images\vendor\jquery.magnific-popup.min-a947d2cab48ed8a1f30b4204b61c71d3b972fb4310a623ffc557b6b021c9f43a.js" />
+    <Content Include="Assets\Client\images\vendor\jquery.nicescroll.min-8ee84a1503b4b52b7a6e38c2ebe0bb2ef9c753b092ef3be7bd6fcdd466aa81fb.js" />
+    <Content Include="Assets\Client\images\vendor\jquery.sticky-kit-f662e065432517b589005f2f7ba3f67f7750feb3ae904b212a14f726269b4ed5.js" />
+    <Content Include="Assets\Client\images\vendor\magnific-popup-9630b47c6ce6e478f5bd9010c98953dea8cea7c26105d481140d7a053f83f336.css" />
+    <Content Include="Assets\Client\images\vendor\modernizr-2.8.3.min-45ecdeadcdcbe1b9d82b701a67aa4014ea9e2f6b25016d503010be6986e3e9a6.js" />
+    <Content Include="Assets\Client\images\vendor\newstoday.min-f909fec19ce8b8781a9f87f8d3a14fff42de8ed847239e4ac0612c0e70de9cf8.js" />
+    <Content Include="Assets\Client\images\vendor\owl.carousel.min-57bdd663fc92f880b7ade453eb5d9bf5b46faa5fce1f980871c0eb961aea2256.js" />
+    <Content Include="Assets\Client\images\vendor\owl.carousel.min-c24ae2b4cf903326dd5cc3c60f187bc50b940fbabed98d449bca2e28934f0e76.css" />
+    <Content Include="Assets\Client\images\vendor\owl.theme.default-076a666a6826572736c3848076e4e90156f0bd03d3911ecc5ea7f5684e01675a.css" />
+    <Content Include="Assets\Client\images\vendor\owl.video.play.html" />
+    <Content Include="Assets\Client\pagead2.googlesyndication.com\pagead\js\f.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\Client\images\vendor\custom-icon\fonts\icobase81a4.eot" />
+    <Content Include="Assets\Client\images\vendor\custom-icon\fonts\icobase81a4.ttf" />
+    <Content Include="Assets\Client\images\vendor\custom-icon\fonts\icobase81a4.woff" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="Assets\Client\images\vendor\font-awesome\fonts\fontawesome-webfontd41d.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -178,6 +255,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\favicon.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -186,16 +264,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Shared\Layouts.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Assets\Admin\" />
+    <Folder Include="Infrastructure\Core\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -204,6 +279,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ListenAndWrite.Common\ListenAndWrite.Common.csproj">
+      <Project>{74282785-88a3-4773-a31b-6ded0468d245}</Project>
+      <Name>ListenAndWrite.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListenAndWrite.Data\ListenAndWrite.Data.csproj">
+      <Project>{cc6d03a5-f163-48d2-9799-85da6c3fa4d9}</Project>
+      <Name>ListenAndWrite.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListenAndWrite.Model\ListenAndWrite.Model.csproj">
+      <Project>{95df06e5-4c32-471b-8c39-326e78514287}</Project>
+      <Name>ListenAndWrite.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListenAndWrite.Service\ListenAndWrite.Service.csproj">
+      <Project>{149129b7-65ee-48f9-8088-50777e30240b}</Project>
+      <Name>ListenAndWrite.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

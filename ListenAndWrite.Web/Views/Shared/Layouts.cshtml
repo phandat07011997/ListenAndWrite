@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html class="html" lang="en">
+<!-- Mirrored from www.listen-and-write.com/audio/level by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Sep 2018 15:50:22 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Listen and Write - Language Dictation" />
+    <meta name="keywords" content="dictation,english,listening,writing,listen,write,learn,speaking" />
+    <title>Listen and Write - Dictation</title>
+    
+    <link rel="icon"
+          type="image/png"
+          href="~/Views/favicon.png" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,700,800" rel="stylesheet">
+    <!-- inject:css -->
+    <link href="~/Assets/Client/images/vendor/bootstrap/css/bootstrap.min-e383ed4c10ef3397e02f3ee8695074066ba694caa4a627589566c6af45d589b8.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/owl.carousel.min-c24ae2b4cf903326dd5cc3c60f187bc50b940fbabed98d449bca2e28934f0e76.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/owl.theme.default-076a666a6826572736c3848076e4e90156f0bd03d3911ecc5ea7f5684e01675a.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/magnific-popup-9630b47c6ce6e478f5bd9010c98953dea8cea7c26105d481140d7a053f83f336.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/custom-icon/style-8863dc08d74dd80dd8eec3cb46270de3ffd0fbd61e0958153e6c2084e5c6e333.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/animate-ff2420236a790440f43c26441f6d0966af5f06cb4cb6e1a3cc6c1304c21cc3ed.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/vendor/font-awesome/css/font-awesome.min-761e6a24bdb226a30c2a5788d620299b30fa11b4b050122ffc270b2f187e9c71.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/newstoday-9abba7d4a55288681f5a017657d499a582e65046a79488799fe51e2a540da6a1.css" rel="stylesheet" />
+    <!-- endinject -->
+    <link href="~/Assets/Client/images/style2-5748d3b8b5df62669251ccb189b97dd8286b3d21cb3689ae568a3f409a855871.css" rel="stylesheet" />
+    <link href="~/Assets/Client/images/slider/luna/luna-6c60027ba1c0692083382645ec63ec2ca140079d6235a75d6ac3c700b714a30b.css" rel="stylesheet" />
+    <!-- inject:head:js -->
+    <script src="~/Assets/Client/ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+    	appId      : '180328971989361',
+        version    : 'v2.8',
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+
+      FB.Event.subscribe('auth.authResponseChange', function(response) {
+        if (response.status === 'connected') {
+          loginWithFB();
+        } else if (response.status === 'not_authorized') {
+          FB.login();
+        } else {
+          FB.login();
+        }
+      });
+      };
+
+      // Load the SDK asynchronously
+      function loadFBSdk() {
+        console.log("loadFBSdk");
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "../../connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      }
+
+      function loginWithFB() {
+      }
+
+      function facebooklogin() {
+            FB.login(function(response) {
+              if (response.status === 'connected') {
+                var fbname;
+                var accessToken = response.authResponse.accessToken;
+                window.location.href="/account/fbsignin?access_token="+accessToken;
+              }
+            }, {scope: 'public_profile'});
+      }
+
+      function loginSubmit(form) {
+      	form.submit();
+      }
+    </script>
+    <!-- endinject -->
+</head>
+<body>
+    <header class="header header--style-one">
+        <div class="header__status color-gray has-border">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8 col-sm-6">
+                        <ul class="header__status__items header__status__items--left">
+                            <li class="d-none d-xl-block d-lg-block" style="font-weight:bold">Welcome to listen-and-write</li>
+                        </ul>
+                    </div>
+                    <div class="col-4 col-sm-6">
+                        <ul class="header__status__items header__status__items--right">
+                            <li class="header__status__social d-none d-xl-block d-lg-block">
+                                <a href="../account/login71b2.html"><i class="fa fa-pencil-square-o"></i>Submit a new audio!</a>
+                            </li>
+                            <li class="header__status__social d-none d-xl-block d-lg-block">
+                                <a href="../account/signup.html"><i class="fa fa-user-plus"></i>Sign Up</a>
+                            </li>
+                            <li class="header__status__login cursor-pointer" data-toggle="modal" data-target="#usermodal" onclick="loadFBSdk()">
+                                <i class="fa fa-lock" aria-hidden="true"></i>Login
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!--//.row -->
+            </div>
+        </div> <!--//.header__status -->
+        <div class="header__logo has-banner u-padding-tb-20">
+            <div class="container">
+                <div class="row u-flex--item-center">
+                    <div class="col-md-9 d-none d-md-block">
+                        <div class="header__banner" alt="870x70">
+                            <img src="Assets/Client/images/title-2018-08.png" alt="Listen and Write">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-nav">
+            <div class="container">
+                <div class="dark-bg">
+                    <div class="row u-flex--item-center">
+                        <div class="col-md-11 col-6">
+                            <nav class="header__nav text-left has-bg d-none d-lg-block">
+                                <ul>
+                                    <li><a href="../audio.html">Home</a></li>
+                                    <li><a href="level.html">Audios</a></li>
+                                    <li><a href="../youtube.html">Youtube</a></li>
+                                    <li><a href="../account/login8ab7.html">Level Test</a></li>
+                                    <li><a href="../account/login0865.html">Groups</a></li>
+                                    <li><a href="../play.html">Numbers</a></li>
+                                    <li class="has-dropdown">
+                                        <a href="#">My Account</a>
+                                        <ul class="menu-dropdown">
+                                            <li class="active"><a href="../account/login84c4.html">Review</a></li>
+                                            <li class="active"><a href="../account/login6583.html">History</a></li>
+                                            <li><a href="../account/login94a8.html">My upload audios</a></li>
+                                            <li><a href="../account/login83b7.html">My Score (Full)</a></li>
+                                            <li><a href="../account/login643e.html">My Score (Quick)</a></li>
+                                            <li><a href="../account/login0b41.html">My Account</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="archive.html">Archive</a></li>
+                                </ul>
+                            </nav>
+                            <button id="JS-openButton" class="cursor-pointer header__menubar header__menubar-light d-lg-none d-xl-none"><i class="ico-bar"></i></button>
+                        </div>
+                        <div class="col-md-1 col-6">
+                            <div class="header__search">
+                                <button class="header__search__btn JS-search-trigger"><i class="fa fa-search"></i></button>
+                            </div>
+                            <!--header search area -->
+                            <div class="header__search__form">
+                                <div class="header__search__inner">
+                                    <button class="close-btn JS-form-close"><i class="ico-close"></i></button>
+                                    <form class="header__search__form-wrapper" action="https://www.listen-and-write.com/search/search">
+                                        <button class="search-action"><span class="ico-search"></span></button>
+                                        <input type="hidden" name="cx" value="partner-pub-0119806589085646:q21c5azenjj" />
+                                        <input type="hidden" name="cof" value="FORID:11" />
+                                        <input type="hidden" name="ie" value="UTF-8" />
+                                        <input class="search-input" type="text" placeholder="Search here" name="q">
+                                    </form>
+                                </div>
+                            </div><!--// header search area end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile menu area start -->
+    <div class="mobile-menu-area">
+        <div class="btn-wrap">
+            <button id="JS-closeButton"><i class="ico-close"></i></button>
+        </div>
+        <div class="search-form">
+            <form action="https://www.listen-and-write.com/search/search" id="cse-search-box">
+                <input type="hidden" name="cx" value="partner-pub-0119806589085646:q21c5azenjj" />
+                <input type="hidden" name="cof" value="FORID:11" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input placeholder="Search Here" type="text" name="q">
+                <button onclick="console.log('search')"><i class="ico-search"></i></button>
+            </form>
+        </div>
+        <nav class="mobile-menu">
+            <ul>
+                <li><a class="no-child" href="../index.html">Home</a></li>
+                <li><a class="no-child" href="level.html">Levels</a></li>
+                <li><a class="no-child" href="../youtube.html">Youtube</a></li>
+                <li><a class="no-child" href="../account/login8ab7.html">Level Test</a></li>
+                <li><a class="no-child" href="../account/login0865.html">Groups</a></li>
+                <li><a class="no-child" href="../play.html">Numbers</a></li>
+            </ul>
+        </nav>
+    </div><!--// Mobile menu area end -->
+    <center>
+        <script async src="~/Assets/Client/pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+        <!-- 728-90Ad -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-0119806589085646"
+             data-ad-slot="9628877441"></ins>
+        <script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </center>
+    <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6990325-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-6990325-2');
+    </script>
+
+    <br />
+    <!-- Main: Footer  -->
+    <section class="full-width link-widgets u-padding-t-80 u-padding-b-80">
+        <div class="container">
+            <div class="widgets-inner">
+                <div class="c-col">
+                    <div class="widget widget--transparent-box">
+                        <div class="widget__title">
+                            <h4>Category 1</h4>
+                        </div>
+                        <ul class="link-lists" alt="category">
+                            <li><a href="category/1.html">Words Stories</a></li>
+                            <li><a href="category/2.html">TED</a></li>
+                            <li><a href="category/3.html">Movies</a></li>
+                            <li><a href="category/4.html">Kids</a></li>
+                            <li><a href="category/5.html">Music</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="c-col">
+                    <div class="widget widget--transparent-box">
+                        <div class="widget__title">
+                            <h4>Category 2</h4>
+                        </div>
+                        <ul class="link-lists" alt="tags">
+                            <li><a href="category/6.html">News</a></li>
+                            <li><a href="category/7.html">Learning</a></li>
+                            <li><a href="category/11.html">VOA Learning English</a></li>
+                            <li><a href="category/8.html">Interview</a></li>
+                            <li><a href="category/12.html">Technology</a></li>
+                            <li><a href="category/13.html">Science</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="c-col">
+                    <div class="widget widget--transparent-box">
+                        <div class="widget__title">
+                            <h4>Languages</h4>
+                        </div>
+                        <ul class="link-lists" alt="tags">
+                            <li><a href="lang/en.html">English</a></li>
+                            <li><a href="lang/fr.html">French</a></li>
+                            <li><a href="lang/de.html">German</a></li>
+                            <li><a href="lang/es.html">Spanish</a></li>
+                            <li><a href="lang.html">more</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="c-col">
+                    <div class="widget widget--transparent-box">
+                        <div class="widget__title">
+                            <h4>Latest</h4>
+                        </div>
+                        <ul class="link-lists" alt="tags">
+                            <li><a href="popular/video.html">Popular videos</a></li>
+                            <li><a href="popular/audio.html">Popular audios</a></li>
+                            <li><a href="../youtube.html">Latest videos</a></li>
+                            <li><a href="level.html">Latest audios</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="c-col">
+                    <div class="widget widget--transparent-box">
+                        <div class="widget__title">
+                            <h4>My history</h4>
+                        </div>
+                        <ul class="link-lists">
+                            <li><a href="../account/login84c4.html">Review</a></li>
+                            <li><a href="../account/login6583.html">History</a></li>
+                            <li><a href="../account/login83b7.html">My Score (Full)</a></li>
+                            <li><a href="../account/login643e.html">My Score (Quick)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- user modal (sign in) -->
+    <div class="modal fade user-modal" id="usermodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Sign in</h4>
+                    <button class="modal-close" data-dismiss="modal"><i class="ico-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="inner">
+                        <ul class="social-login">
+                            <li><a class="btn-fb" href="#" onclick="facebooklogin()"><i class="fa fa-facebook"></i>Facebook</a></li>
+                        </ul>
+                        <div class="devider"><span>or</span></div>
+                        <form action="https://www.listen-and-write.com/account/login" method="post" class="user-form">
+                            <div class="form-group u-margin-b-30">
+                                <label for="login">Login ID</label>
+                                <input name='login' type="text" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <div class="u-flex u-flex--content-between">
+                                    <label for="password1">Password</label>
+                                    <a href="../account/newpw.html">Forget Password</a>
+                                </div>
+                                <input name='password' type="password" class="form-control" id="password1">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input name="remember_me" type="checkbox" class="custom-control-input" id="remember">
+                                <label class="custom-control-label" for="remember">Remember sign in</label>
+                                <input type="hidden" name="redirecturl" value="" />
+                            </div>
+                            <div class="form-submit u-margin-t-20">
+                                <button type="submit" onclick="loginSubmit(this.form)" class="text-uppercase btn-block c-btn c-btn--solid c-btn--color-brand">Sign In</button>
+                            </div>
+                            <div class="bottom-msg u-margin-t-35">
+                                Dont have an account? <a href="../account/signup.html">Sign up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer__end footer__end--dark">
+            <div class="container">
+                <div class="footer__copyright u-padding-t-15">
+                    <p class="u-font13">© 2018 Listen-and-Write.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- user modal (sign up) -->
+    <div class="modal fade user-modal" id="usermodal-up" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Sign Up</h4>
+                    <button class="modal-close" data-dismiss="modal"><i class="ico-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="inner">
+                        <ul class="social-login">
+                            <li><a class="btn-fb" href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                            <li><a class="btn-gle-pl" href="#"><i class="fa fa-google-plus"></i>Google Plus</a></li>
+                        </ul>
+                        <div class="devider"><span>or</span></div>
+                        <form action="#" class="user-form">
+                            <div class="form-group u-margin-b-30">
+                                <label for="name">Full Name</label>
+                                <input type="email" class="form-control" id="name">
+                            </div>
+                            <div class="form-group u-margin-b-30">
+                                <label for="email1">Email</label>
+                                <input type="email" class="form-control" id="email1">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="remember2">
+                                <label class="custom-control-label" for="remember2">
+                                    Creating an account means you’re okay with our <a href="#">Terms of Service,</a>
+                                    <a href="#">Privacy Policy</a>
+                                </label>
+                            </div>
+                            <div class="form-submit u-margin-t-25">
+                                <button type="submit" class="text-uppercase btn-block c-btn c-btn--solid c-btn--color-brand">Sign Up</button>
+                            </div>
+                            <div class="bottom-msg u-margin-t-35">
+                                Don't have an account? <a data-dismiss="modal" data-toggle="modal" data-target="#usermodal" href="#">Log In</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- inject:js -->
+    <script src="~/Assets/Client/images/vendor/bootstrap/js/popper.min-998e8fe8c732be8c218cae0105f901d10d1baf1efa5df3549703fefeef33a809.js"></script>
+    <script src="~/Assets/Client/images/vendor/bootstrap/js/bootstrap.min-77cce082cfd274b236b5f0787442704609e19217999ea4e087abdfe88ffd001b.js"></script>
+    <script src="~/Assets/Client/images/vendor/owl.carousel.min-57bdd663fc92f880b7ade453eb5d9bf5b46faa5fce1f980871c0eb961aea2256.js"></script>
+    <script src="~/Assets/Client/images/vendor/jquery.sticky-kit-f662e065432517b589005f2f7ba3f67f7750feb3ae904b212a14f726269b4ed5.js"></script>
+    <script src="~/Assets/Client/images/vendor/flexmenu.min-68de81a1cc96e2d617610aa1c8a4f8195d43e8b96688b4d8af575a5e43d09b43.js"></script>
+    <script src="~/Assets/Client/images/vendor/jquery.magnific-popup.min-a947d2cab48ed8a1f30b4204b61c71d3b972fb4310a623ffc557b6b021c9f43a.js"></script>
+    <script src="~/Assets/Client/images/vendor/jquery.nicescroll.min-8ee84a1503b4b52b7a6e38c2ebe0bb2ef9c753b092ef3be7bd6fcdd466aa81fb.js"></script>
+    <script src="~/Assets/Client/images/vendor/newstoday.min-f909fec19ce8b8781a9f87f8d3a14fff42de8ed847239e4ac0612c0e70de9cf8.js"></script>
+    <!-- endinject -->
+</body>
+<!-- Mirrored from www.listen-and-write.com/audio/level by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Sep 2018 15:50:30 GMT -->
+</html>
