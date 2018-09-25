@@ -22,6 +22,7 @@ namespace ListenAndWrite.Web.Infrastructure.Extensions
             audio.UpdateBy = audioVM.UpdateBy;
             audio.UpdateDate = audioVM.UpdateDate;
             audio.Status = audioVM.Status;
+            audio.NumTrack = audioVM.NumTrack;
 
         }
         public static void UpdateTrack(this Track track , TrackViewModel trackVM)

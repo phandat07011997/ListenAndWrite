@@ -1,0 +1,100 @@
+﻿@model ListenAndWrite.Web.Models.AudioViewModel
+@{
+    ViewBag.Title = "AddAudio";
+    Layout = "~/Views/Shared/AdminLayouts.cshtml";
+}
+@section footerJS{
+    <script>
+        $('#btnSelectAudio').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder;
+            finder.selectActionFunction = function (url) {
+                $('#txtAudio').val(url);
+            }
+            finder.popup();
+        });
+    </script>
+    }
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Thêm mới audio
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a ui-sref="#">Audio</a></li>
+        <li class="active">Thêm mới</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thêm mới</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("AddAudio", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken();
+            @Html.ValidationSummary(false, "", new { @class = "error" })
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Audio Title</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.AudioTitle, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Audio Path</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.Path, new { @class = "form-control",@id="txtAudio" })
+                        <button id="btnSelectAudio" class="btn btn-default">Upload file</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Level</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.Level, new { @class = "form-control", type = "number", min = "1", step = "1" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Duration</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", type = "number", min = "0", step = "1" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(model => model.Status)
+                                Kích hoạt
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a href="/Admin/ListAudio" class="btn btn-default">Hủy</a>
+                <button type="submit" class="btn btn-info pull-right">Lưu</button>
+            </div>
+
+        }
+
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

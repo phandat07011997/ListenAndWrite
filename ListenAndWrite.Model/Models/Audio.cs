@@ -27,6 +27,8 @@ namespace ListenAndWrite.Model.Models
         [Required]
         public int Duration { set; get; }
 
+        public int? NumTrack { set; get; }
+
         [MaxLength(500)]
         public string Description { set; get; }
 
@@ -38,7 +40,7 @@ namespace ListenAndWrite.Model.Models
         [MaxLength(256)]
         public string UpdateBy { set; get; }
 
-        public DateTime UpdateDate { set; get; }
+        public DateTime? UpdateDate { set; get; }
 
         public bool Status { set; get; }
 

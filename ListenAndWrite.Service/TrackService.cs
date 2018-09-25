@@ -3,6 +3,7 @@ using ListenAndWrite.Data.Repositories;
 using ListenAndWrite.Model.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ListenAndWrite.Service
 {
@@ -13,6 +14,8 @@ namespace ListenAndWrite.Service
         void Update(Track track);
 
         Track Delete(int id);
+
+        void DeleteByAudioId(int audioId);
 
         Track GetTrackByTitle(string trackTitle);
 
@@ -40,6 +43,11 @@ namespace ListenAndWrite.Service
         public Track Delete(int id)
         {
             return _trackRepository.Delete(id);
+        }
+
+        public void DeleteByAudioId(int audioId)
+        {
+            _trackRepository.DeleteMulti(x => x.AudioId == audioId);
         }
 
         public IEnumerable<Track> GetListTrackByAudioId(int audioId)
