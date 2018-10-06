@@ -89,5 +89,28 @@ namespace ListenAndWrite.Web.Controllers
                 }, JsonRequestBehavior.AllowGet
                 );
         }
+        [HttpGet]
+        public JsonResult LoadAudio(int page, int pageSize)
+        {
+            int totalRow = 0;
+            var audioModel = _audioService.GetLastestAudio(page, pageSize, out totalRow);
+            var audioViewModel = Mapper.Map<IEnumerable<Audio>, IEnumerable<AudioViewModel>>(audioModel);
+            
+            return Json(new
+            {
+                Items = audioViewModel,
+                TotalCount = totalRow,
+            }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult DeleteAudio(int audioId)
+        {
+            _audioService.Delete(audioId);
+            _audioService.Save();
+            return Json(new
+            {
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

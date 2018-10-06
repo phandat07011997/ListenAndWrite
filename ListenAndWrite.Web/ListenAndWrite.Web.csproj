@@ -179,7 +179,9 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AudioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -6150,7 +6152,9 @@
     <Content Include="Assets\Client\images\vendor\owl.carousel.min-c24ae2b4cf903326dd5cc3c60f187bc50b940fbabed98d449bca2e28934f0e76.css" />
     <Content Include="Assets\Client\images\vendor\owl.theme.default-076a666a6826572736c3848076e4e90156f0bd03d3911ecc5ea7f5684e01675a.css" />
     <Content Include="Assets\Client\images\vendor\owl.video.play.html" />
-    <Content Include="Assets\Client\js\controllers\addTrack.js" />
+    <Content Include="Assets\Admin\js\controllers\addTrack.js" />
+    <Content Include="Assets\Admin\js\controllers\listAudio.js" />
+    <Content Include="Assets\Client\js\controllers\listAudio.js" />
     <Content Include="Assets\Client\js\jquery.twbsPagination.min.js" />
     <Content Include="Assets\Client\pagead2.googlesyndication.com\pagead\js\f.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -6505,6 +6509,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\libs\mustache\bin\" />
     <Folder Include="Infrastructure\Core\" />
+    <Folder Include="Views\Audio\" />
+    <Folder Include="Views\Track\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

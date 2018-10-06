@@ -3,252 +3,73 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
+@section footerJS{
+    <script src="~/Assets/Admin/libs/mustache/mustache.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.twbsPagination.min.js"></script>
+    <script src="~/Assets/Client/js/controllers/listAudio.js"></script>
+
+}
 
 <div class="row" data-sticky_parent="">
     <div class="col-lg-8 content-wrapper">
         <div class="posts-box3 archive-box">
             <div class="posts-box3__top">
-                <h2 class="posts-box3__top__title">Latest audios: </h2>
+                <h2 class="posts-box3__top__title">Latest audios: @(ViewBag.Level != null ? " Level " + ViewBag.Level : "") </h2>
+
             </div>
+            <input type="hidden" id="level" value="@ViewBag.Level"/>
 
             <div class="archive-posts">
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16742.html">South Korean ‘Smart Farm’ Built Inside Former Road Tunnel</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 9
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:02
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>2 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16718.html">Study: For Some, Daily Aspirin May Do More Harm Than Good</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 11
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:06
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>4 days ago</time>
+                @*<article class="post-item">
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <h6 class="post-title">
+                                    <a href="choose/16742.html">South Korean ‘Smart Farm’ Built Inside Former Road Tunnel</a>
+                                </h6>
+                                <div class="item">
+                                </div>
+                                <div class="item">
+                                    <i class="fa fa-star-half-o"></i>level = 9
+                                </div>
+                                <div class="item">
+                                    <i class="fa fa-hourglass-o"></i>2:02
+                                </div>
+                                <div class="item">
+                                    <time><i class="fa fa-clock-o"></i>2 days ago</time>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16708.html">Lets.Recycle [bqh009]</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 12
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>0:08
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>7 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16707.html">A.Picnic.By.The.River [bqh009]</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 12
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>1:01
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>7 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16690.html">Underwater Robot to Hunt Lionfish to Help Protect Coral Reefs</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 9
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:10
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>9 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16685.html">The single mum who can&#39;t afford to work - BBC Stories</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star"></i>level = 18
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:00
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>10 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16681.html">New Blood Test Finds Deadly Skin Cancer</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 9
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:04
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>11 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16680.html">Simen Sineck (8th week)</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star"></i>level = 18
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>1:50
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>11 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16677.html">Scientists Say Hotter Weather Worsens Wildfire in Western US</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 11
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>2:03
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>12 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
-                <article class="post-item">
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <h6 class="post-title">
-                                <a href="choose/16674.html">Americans Spending and Doing More for Their Pets</a>
-                            </h6>
-                            <div class="item">
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-star-half-o"></i>level = 9
-                            </div>
-                            <div class="item">
-                                <i class="fa fa-hourglass-o"></i>1:25
-                            </div>
-                            <div class="item">
-                                <time><i class="fa fa-clock-o"></i>13 days ago</time>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <hr />
+                    </article>
+                    <hr />*@
+
             </div><!--//.posts-list -->
-            <nav class="pagination" role="navigation" aria-label="pager">
+            <ul id="pagination" class="pagination-sm"></ul>
+            @*<nav class="pagination" role="navigation" aria-label="pager">
 
 
-                <span class="page current">
-                    1
-                </span>
-                <span class="page">
-                    <a rel="next" href="level4658.html?page=2">2</a>
-                </span>
-                <span class="page">
-                    <a href="level9ba9.html?page=3">3</a>
-                </span>
-                <span class="page">
-                    <a href="levelfdb0.html?page=4">4</a>
-                </span>
-                <span class="page">
-                    <a href="levelaf4d.html?page=5">5</a>
-                </span>
-                <span class="page gap">&hellip;</span>
-                <span class="next">
-                    <a rel="next" href="level4658.html?page=2">Next &rsaquo;</a>
-                </span>
-                <span class="last">
-                    <a href="levelaa9e.html?page=287">Last &raquo;</a>
-                </span>
-            </nav>
+                    <span class="page current">
+                        1
+                    </span>
+                    <span class="page">
+                        <a rel="next" href="level4658.html?page=2">2</a>
+                    </span>
+                    <span class="page">
+                        <a href="level9ba9.html?page=3">3</a>
+                    </span>
+                    <span class="page">
+                        <a href="levelfdb0.html?page=4">4</a>
+                    </span>
+                    <span class="page">
+                        <a href="levelaf4d.html?page=5">5</a>
+                    </span>
+                    <span class="page gap">&hellip;</span>
+                    <span class="next">
+                        <a rel="next" href="level4658.html?page=2">Next &rsaquo;</a>
+                    </span>
+                    <span class="last">
+                        <a href="levelaa9e.html?page=287">Last &raquo;</a>
+                    </span>
+                </nav>*@
         </div> <!--//.posts-box  -->
     </div>
     <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
@@ -296,7 +117,7 @@
                          data-ad-client="ca-pub-0119806589085646"
                          data-ad-slot="2273830705"></ins>
                     <script>
-                          (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </figure>
             </div>
@@ -304,3 +125,26 @@
         </div>
     </div>
 </div>
+<script id="data-template" type="x-tmpl-mustache">
+    <article class="post-item">
+        <div class="post-content">
+            <div class="post-meta">
+                <h6 class="post-title">
+                    <a href="#">{{AudioTitle}}</a>
+                </h6>
+                <div class="item">
+                </div>
+                <div class="item">
+                    <i class="fa fa-star-half-o"></i>level = {{Level}}
+                </div>
+                <div class="item">
+                    <i class="fa fa-hourglass-o"></i>{{Duration}}
+                </div>
+                <div class="item">
+                    <time><i class="fa fa-clock-o"></i>{{CreatedDate}}</time>
+                </div>
+            </div>
+        </div>
+    </article>
+    <hr />
+</script>

@@ -14,9 +14,16 @@ namespace ListenAndWrite.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Level",
+                url: "audio/level/{level}",
+                defaults: new { controller = "Home", action = "Index", level = UrlParameter.Optional },
+                namespaces: new string[] { "ListenAndWrite.Web.Controllers" }
+            );
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{level}",
+                defaults: new { controller = "Home", action = "Index", level = UrlParameter.Optional },
+                namespaces: new string[] { "ListenAndWrite.Web.Controllers" }
             );
         }
     }
