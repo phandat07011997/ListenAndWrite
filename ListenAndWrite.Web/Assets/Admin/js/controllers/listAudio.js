@@ -8,11 +8,7 @@ var listAudio = {
         listAudio.registerEvents();
     },
     registerEvents: function () {
-        $('#btnClearTrack').click(function () {
-            
-
-        });
-        $('#btnDel').off('click').on('click', function (e) {
+        $('.btnDel').off('click').on('click', function (e) {
             e.preventDefault();
             var r = confirm("Delete this audio ?");
             if (r == true) {
