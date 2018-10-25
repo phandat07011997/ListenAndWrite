@@ -1,4 +1,5 @@
-﻿using ListenAndWrite.Model.Models;
+﻿using AutoMapper;
+using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
 using ListenAndWrite.Web.Infrastructure.Extensions;
 using ListenAndWrite.Web.Models;
@@ -17,19 +18,31 @@ namespace ListenAndWrite.Web.Controllers
         {
             this._audioService = audioService;
         }
-        [HttpPost]
-        public ActionResult AddAudio(AudioViewModel audioViewModel)
+        public ActionResult Level(int? level)
         {
-            if (ModelState.IsValid)
+            var listLevel = _audioService.GetListLevel();
+            if (level != null)
+                ViewBag.Level = level;
+            return View(listLevel);
+        }
+        public ActionResult Choose(int id)
+        {
+            var audioModel=_audioService.GetById(id);
+            audioModel.NumTrack = _audioService.GetTotalTrack(id);
+            var audioViewModel = Mapper.Map<Audio,AudioViewModel>(audioModel);
+            return View(audioViewModel);
+        }
+        [HttpGet]
+        public JsonResult LoadAudio(int page, int pageSize, int? level)
+        {
+            int totalRow = 0;
+            var audioModel = _audioService.GetLastestActiveAudio(level, page, pageSize, out totalRow);
+            var audioViewModel = Mapper.Map<IEnumerable<Audio>, IEnumerable<AudioViewModel>>(audioModel);
+            return Json(new
             {
-                Audio audioModel = new Audio();
-                audioModel.UpdateAudio(audioViewModel);
-                audioModel.CreatedDate = DateTime.Now;
-                var audio = _audioService.Add(audioModel);
-                _audioService.Save();
-                return RedirectToAction("AddTrack", "Track", new { audioId = audio.Id });
-            }
-            return View();
+                Items = audioViewModel,
+                TotalCount = totalRow,
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

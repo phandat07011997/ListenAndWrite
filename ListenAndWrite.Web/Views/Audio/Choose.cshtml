@@ -1,0 +1,222 @@
+﻿@model ListenAndWrite.Web.Models.AudioViewModel
+@{
+    ViewBag.Title = "Choose";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+@section footerJS{
+    <script src="~/Assets/Client/js/controllers/playAudio.js"></script>
+}
+<div class="row" data-sticky_parent>
+    <div class="col-lg-8 content-wrapper">
+        <div data-sticky_column>
+            <div class="m-post-content m-post-content--tok">
+                <div class="post-top">
+                    <div class="breadcrumbs u-margin-b-10">
+                        <span><a href="https://www.listen-and-write.com/">Home</a></span>
+                        <span class="separetor">-</span>
+                        <span><a href="https://www.listen-and-write.com/audio/choose/16584">Full Mode</a></span>
+                        <span class="separetor">-</span>
+                        <span class="current">@Model.AudioTitle</span>
+                    </div>
+                    <h1 class="post-title">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div style="width:120px;height:120px; border: 6px solid #DDDDDD; background:RGB(120,188,100);vertical-align:middle;">
+                                        <center style="padding:10px;"><a href="#" style="color: #000000;background-color: RGB(120,188,100);">Level @Model.Level</a></center>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Model.AudioTitle
+                                </td>
+                            </tr>
+                        </table>
+                    </h1>
+                    @*<div class="post-meta">
+                            <div class="item">
+                                <i class="fa fa-microphone"></i>
+                                <strong>English</strong>
+                            </div>
+                            <div class="item">
+                                <i class="fa fa-address-book-o"></i> <a href="https://www.listen-and-write.com/channel/user/dFpvNkVmOG05eU1uUGx3MDJ3bE1oVXdOd3h2WGxzZzA2M3FiSVpOclAraz0tLURQWUN0M1QwazR2WE8xbnVaQmFyWFE9PQ==--bda5df74f1bdd15535646f4e5e8f21b626a2dde5">listen***</a>
+                            </div>
+                            <div class="item">
+                                <i class="fa fa-clock-o"></i>
+                                on 2018/08/13
+                            </div>
+                        </div>*@
+                </div>
+                <div class="entry-content">
+                    <div id="player2" style="border:2px solid #dddddd; padding-bottom:10px;">
+                        <p>
+                            <div id="sentence_list">
+
+                                <div>
+                                    <i style="padding: 0px 15px;">Track</i> : <input id="prevTrack" type=button value="<" class="btn-prev" />
+                                    <span id="currentTrack">1</span>
+                                    of <span id="numTrack">@Model.NumTrack</span>
+                                    <input id="nextTrack" type=button value=">"class="btn-next" />
+                                </div>
+                                <div>
+                                    <br />
+                                    <table border="0">
+                                        <tr>
+                                            <td width="20" align=right></td>
+                                            <td>
+                                                <div style="overflow: hidden;position: relative;height:220px;">
+                                                    <div id="slimprogress" style="width:517px; height:3px;"></div>
+                                                    <input type="hidden" id="audioId" value="@Model.Id" />
+                                                    <div>
+                                                        <audio controls id="audio" hidden="hidden" src="@Model.Path" type="audio/mpeg"></audio>
+                                                    </div>
+                                                    <div class="form-group text-center">
+                                                        <button class="btn btn-primary btn-lg" id="btn-play">
+                                                            <span class="glyphicon glyphicon-play"></span>Phát
+                                                        </button>
+                                                        <div class="btn btn-primary btn-lg btn-next" id="btn-next2">
+                                                            <span class="glyphicon glyphicon-plus"></span> Next track
+                                                        </div>
+                                                        <div class="btn btn-primary btn-lg" id="btn-score">
+                                                            <span class="glyphicon glyphicon-certificate"></span><a href="#chartContainer" style="color: white">Xem điểm</a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <i class='button medium icon'><i class='delete'></i><button type='button' id="stop">Stop</button></i>
+                                                <i class='button medium icon'><i class='check'></i><button id="hint" type='button'>Hint</button></i>
+                                                <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                                <div><textarea cols="38" rows="1" id="audioScript" onkeyup="check(16584, 0)" style=""></textarea></div>
+                                                <div>
+                                                    <span id="keylog" style="width:500px; height:100px; display:none">
+                                                        <span id="key_a">A</span>
+                                                        <span id="key_b">B</span>
+                                                        <span id="key_c">C</span>
+                                                        <span id="key_d">D</span>
+                                                        <span id="key_e">E</span>
+                                                        <span id="key_f">F</span>
+                                                        <span id="key_g">G</span>
+                                                        <span id="key_h">H</span>
+                                                        <span id="key_i">I</span>
+                                                        <span id="key_j">J</span>
+                                                        <span id="key_k">K</span>
+                                                        <span id="key_l">L</span>
+                                                        <span id="key_m">M</span>
+                                                        <span id="key_n">N</span>
+                                                        <span id="key_o">O</span>
+                                                        <span id="key_p">P</span>
+                                                        <span id="key_q">Q</span>
+                                                        <span id="key_r">R</span>
+                                                        <span id="key_s">S</span>
+                                                        <span id="key_t">T</span>
+                                                        <span id="key_u">U</span>
+                                                        <span id="key_v">V</span>
+                                                        <span id="key_w">W</span>
+                                                        <span id="key_x">X</span>
+                                                        <span id="key_y">Y</span>
+                                                        <span id="key_z">Z</span>
+                                                    </span>
+                                                </div>
+                                                <br />
+                                                <div id="logger"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                </div>  <!-- player2 -->
+                <div class='command' style='width:100%;'>
+                    &nbsp;<strong>Dictionary Lookup</strong><br />
+                    <ul id="failedWord" style='display:inline-block;'></ul>
+                </div>
+                <p>
+                <p>
+                    <center>
+                        <br />
+                        <h3>
+                            Please login to save your score and to see your history. >>
+                            <a href="https://www.listen-and-write.com/account/login?redirecturl=/audio/show/16584">Login</a>
+                        </h3>
+                        <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
+                    </center>
+                </p>
+                <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div><br />
+                <div id="myscore"></div>
+                <i class="fa fa-share-alt"></i> Embed this listen-and-write audio clip to your blog or site.<br />
+                <input id='embedcode' value='<iframe src="https://www.listen-and-write.com/audio/previeweshow/16584" width="510" height="340" frameborder="0" scrolling="no"></iframe>'
+                       size=80 onClick='this.select();'><br />
+                Copy and paste the code above.
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
+    <div class="sidebar__inner">
+        <div class="widget widget--transparent-box img-banner">
+            <figure>
+
+
+            </figure>
+
+            <!-- display  -->
+
+        </div>
+        <!-- trending news -->
+        <div class="widget widget--border-box cat-trending single-cat">
+            <div class="widget__title has-ajax-load">
+                <h4>Related Audios ... Level 11 <i class="fa fa-star-half-o"></i></h4>
+            </div>
+            <ul class="posts-wrap">
+                <li class="cat-sports">
+                    <div class="post-content">
+                        <h6 class="post-title">
+                            <a href="https://www.listen-and-write.com/audio/show/16559">Software Teaches Robot Hand How to Move in the Real World</a>
+                        </h6>
+                        <div class="post-meta">
+                            <i class="fa fa-clock-o"></i> on 2018/08/06
+                        </div>
+                    </div>
+                </li>
+                <li class="cat-sports">
+                    <div class="post-content">
+                        <h6 class="post-title">
+                            <a href="https://www.listen-and-write.com/audio/show/16552">One of English&#39;s Most Beautiful Words-VOA-Bach</a>
+                        </h6>
+                        <div class="post-meta">
+                            <i class="fa fa-clock-o"></i> on 2018/08/04
+                        </div>
+                    </div>
+                </li>
+                <li class="cat-sports">
+                    <div class="post-content">
+                        <h6 class="post-title">
+                            <a href="https://www.listen-and-write.com/audio/show/16423">Another Big Year for Largest Comic Book Event of its Kind</a>
+                        </h6>
+                        <div class="post-meta">
+                            <i class="fa fa-clock-o"></i> on 2018/07/21
+                        </div>
+                    </div>
+                </li>
+                <li class="cat-sports">
+                    <div class="post-content">
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- banner -->
+        <div class="widget widget--transparent-box img-banner">
+            <figure>
+
+
+            </figure>
+        </div>
+    </div>
+</div>
+

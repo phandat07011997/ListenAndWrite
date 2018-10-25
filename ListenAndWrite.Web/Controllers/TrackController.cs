@@ -19,10 +19,15 @@ namespace ListenAndWrite.Web.Controllers
             this._audioService = audioService;
             this._trackService = trackService;
         }
-        public ActionResult AddTrack(int audioId)
+        [HttpGet]
+        public JsonResult LoadTrack(int audioId, int track)
         {
-            var audioViewModel = Mapper.Map<Audio, AudioViewModel>(_audioService.GetById(audioId));
-            return View(audioViewModel);
+            var trackModel = _trackService.GetTrackByAudioId(track, audioId);
+            var trackVM = Mapper.Map<Track, TrackViewModel>(trackModel);
+            return Json(new
+            {
+                Item = trackVM,
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

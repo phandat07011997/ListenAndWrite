@@ -112,5 +112,42 @@ namespace ListenAndWrite.Web.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public string Upload(HttpPostedFileBase file)
+        {
+            //file.SaveAs(Server.MapPath("~/Upload/" + file.FileName));
+            //file.InputStream.Close();
+            //file.InputStream.Dispose();
+            //file.InputStream = null;
+
+            
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    file.SaveAs(Server.MapPath("~/Upload/" + file.FileName));
+                    file.InputStream.Close();
+                    file.InputStream.Dispose();
+                    GC.Collect();
+
+                    // other operations, where can occur an exception 
+                    // (because the uploaded file can have a bad content etc.)
+                }
+            }
+            catch (Exception e)
+            {
+                if (file.InputStream != null)
+                    file.InputStream.Dispose();
+
+                GC.Collect();
+
+                if (!string.IsNullOrEmpty(Server.MapPath("~/Upload/" + file.FileName)))
+                {
+                    if (System.IO.File.Exists(Server.MapPath("~/Upload/" + file.FileName)))
+                        System.IO.File.Delete(Server.MapPath("~/Upload/" + file.FileName)); //here is the error
+                }
+            }
+            return "/Upload/" + file.FileName;
+        }
     }
 }

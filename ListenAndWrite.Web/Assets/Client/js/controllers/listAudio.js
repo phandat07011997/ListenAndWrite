@@ -1,5 +1,5 @@
 ﻿var config = {
-    pageSize: 2,
+    pageSize: 10,
     pageIndex: 1,
 }
 var listAudio = {
@@ -12,7 +12,7 @@ var listAudio = {
     },
     loadData: function () {
         $.ajax({
-            url: '/Home/LoadAudio',
+            url: '/Audio/LoadAudio',
             type: 'GET',
             dataType: 'json',
             data: {
@@ -41,7 +41,8 @@ var listAudio = {
                             AudioTitle: item.AudioTitle,
                             CreatedDate: myDate.getDate() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getFullYear(),
                             Level: item.Level,
-                            Duration: minutes + ":" + seconds
+                            Duration: minutes + ":" + seconds,
+                            Id: item.Id
                             });
                     });
                     $('.archive-posts').html(html);

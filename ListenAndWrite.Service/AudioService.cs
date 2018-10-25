@@ -29,15 +29,21 @@ namespace ListenAndWrite.Service
 
         IEnumerable<Audio> Search(string keyword, int page, int pageSize, out int totalRow);
 
+        IEnumerable<int> GetListLevel();
+
+        int GetTotalTrack(int id);
+
         void Save();
     }
     public class AudioService : IAudioService
     {
+        private ITrackRepository _trackRepository;
         private IAudioRepository _audioRepository;
         private IUnitOfWork _unitOfWork;
 
-        public AudioService(IAudioRepository audioRepository, IUnitOfWork unitOfWork)
+        public AudioService(ITrackRepository trackRepository, IAudioRepository audioRepository, IUnitOfWork unitOfWork)
         {
+            this._trackRepository = trackRepository;
             this._audioRepository = audioRepository;
             this._unitOfWork = unitOfWork;
         }
@@ -81,6 +87,16 @@ namespace ListenAndWrite.Service
         public IEnumerable<string> GetListAudioByTitle(string title)
         {
             return _audioRepository.GetMulti(x => x.Status == true && x.AudioTitle.Contains(title)).Select(y => y.AudioTitle);
+        }
+
+        public IEnumerable<int> GetListLevel()
+        {
+            return _audioRepository.GetListLevel();
+        }
+
+        public int GetTotalTrack(int id)
+        {
+            return _trackRepository.GetMulti(x => x.AudioId == id).Count();
         }
 
         public void Save()

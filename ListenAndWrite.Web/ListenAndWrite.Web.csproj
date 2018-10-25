@@ -6155,6 +6155,7 @@
     <Content Include="Assets\Admin\js\controllers\addTrack.js" />
     <Content Include="Assets\Admin\js\controllers\listAudio.js" />
     <Content Include="Assets\Client\js\controllers\listAudio.js" />
+    <Content Include="Assets\Client\js\controllers\playAudio.js" />
     <Content Include="Assets\Client\js\jquery.twbsPagination.min.js" />
     <Content Include="Assets\Client\pagead2.googlesyndication.com\pagead\js\f.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -6504,12 +6505,14 @@
     <Content Include="Views\Admin\ListAudio.cshtml" />
     <Content Include="Views\Admin\AddAudio.cshtml" />
     <Content Include="Views\Admin\AddTrack.cshtml" />
+    <Content Include="Views\Audio\Level.cshtml" />
+    <Content Include="Views\Audio\Choose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\libs\mustache\bin\" />
     <Folder Include="Infrastructure\Core\" />
-    <Folder Include="Views\Audio\" />
+    <Folder Include="Upload\" />
     <Folder Include="Views\Track\" />
   </ItemGroup>
   <ItemGroup>

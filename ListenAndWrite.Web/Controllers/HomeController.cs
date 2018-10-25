@@ -16,24 +16,12 @@ namespace ListenAndWrite.Web.Controllers
             this._audioService = audioService;
         }
 
-        public ActionResult Index(int? level)
+        public ActionResult Index()
         {
-            if (level != null)
-                ViewBag.Level = level;
-            return View();
+            var listLevel = _audioService.GetListLevel();
+            return View(listLevel);
         }
 
-        [HttpGet]
-        public JsonResult LoadAudio(int page, int pageSize, int? level)
-        {
-            int totalRow = 0;
-            var audioModel =_audioService.GetLastestActiveAudio(level, page, pageSize, out totalRow);
-            var audioViewModel = Mapper.Map<IEnumerable<Audio>, IEnumerable<AudioViewModel>>(audioModel);
-            return Json(new
-            {
-                Items = audioViewModel,
-                TotalCount = totalRow,
-            }, JsonRequestBehavior.AllowGet);
-        }
+        
     }
 }

@@ -21,6 +21,8 @@ namespace ListenAndWrite.Service
 
         IEnumerable<Track> GetListTrackByAudioId(int audioId);
 
+        Track GetTrackByAudioId(int order, int audioId);
+
         void Save();
     }
 
@@ -53,6 +55,12 @@ namespace ListenAndWrite.Service
         public IEnumerable<Track> GetListTrackByAudioId(int audioId)
         {
             return _trackRepository.GetMulti(x => x.AudioId == audioId).OrderBy(y => y.TimeStart);
+        }
+
+        public Track GetTrackByAudioId(int order, int audioId)
+        {
+            var model = _trackRepository.GetMulti(x => x.AudioId == audioId).OrderBy(y=>y.TrackTitle).Skip(order-1).Take(1);
+            return model.First();
         }
 
         public Track GetTrackByTitle(string trackTitle)
