@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 @section footerJS{
+    <script src="~/Assets/Admin/libs/jquery-ui/jquery-ui.js"></script>
+    <link href="~/Assets/Admin/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
     <script src="~/Assets/Client/js/controllers/playAudio.js"></script>
 }
 <div class="row" data-sticky_parent>
@@ -52,10 +54,10 @@
                             <div id="sentence_list">
 
                                 <div>
-                                    <i style="padding: 0px 15px;">Track</i> : <input id="prevTrack" type=button value="<" class="btn-prev" />
+                                    <i style="padding: 0px 15px;">Track</i> : <input id="btn-prev" type=button value="<" class="btn-prev" />
                                     <span id="currentTrack">1</span>
                                     of <span id="numTrack">@Model.NumTrack</span>
-                                    <input id="nextTrack" type=button value=">"class="btn-next" />
+                                    <input id="btn-next" type=button value=">" class="btn-next" />
                                 </div>
                                 <div>
                                     <br />
@@ -63,7 +65,7 @@
                                         <tr>
                                             <td width="20" align=right></td>
                                             <td>
-                                                <div style="overflow: hidden;position: relative;height:220px;">
+                                                <div style="overflow: hidden;position: relative;height:80px;">
                                                     <div id="slimprogress" style="width:517px; height:3px;"></div>
                                                     <input type="hidden" id="audioId" value="@Model.Id" />
                                                     <div>
@@ -87,73 +89,77 @@
                                                 <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
                                                 <div><textarea cols="38" rows="1" id="audioScript" onkeyup="check(16584, 0)" style=""></textarea></div>
                                                 <div>
-                                                    <span id="keylog" style="width:500px; height:100px; display:none">
-                                                        <span id="key_a">A</span>
-                                                        <span id="key_b">B</span>
-                                                        <span id="key_c">C</span>
-                                                        <span id="key_d">D</span>
-                                                        <span id="key_e">E</span>
-                                                        <span id="key_f">F</span>
-                                                        <span id="key_g">G</span>
-                                                        <span id="key_h">H</span>
-                                                        <span id="key_i">I</span>
-                                                        <span id="key_j">J</span>
-                                                        <span id="key_k">K</span>
-                                                        <span id="key_l">L</span>
-                                                        <span id="key_m">M</span>
-                                                        <span id="key_n">N</span>
-                                                        <span id="key_o">O</span>
-                                                        <span id="key_p">P</span>
-                                                        <span id="key_q">Q</span>
-                                                        <span id="key_r">R</span>
-                                                        <span id="key_s">S</span>
-                                                        <span id="key_t">T</span>
-                                                        <span id="key_u">U</span>
-                                                        <span id="key_v">V</span>
-                                                        <span id="key_w">W</span>
-                                                        <span id="key_x">X</span>
-                                                        <span id="key_y">Y</span>
-                                                        <span id="key_z">Z</span>
-                                                    </span>
+                                                    <button id="submit" class="btn-success">Submit</button>
                                                 </div>
-                                                <br />
-                                                <div id="logger"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </p>
-                    </div>
-                </div>  <!-- player2 -->
-                <div class='command' style='width:100%;'>
-                    &nbsp;<strong>Dictionary Lookup</strong><br />
-                    <ul id="failedWord" style='display:inline-block;'></ul>
-                </div>
-                <p>
-                <p>
-                    <center>
+                        <p id="result"></p>
+                        <div>
+                            <span id="keylog" style="width:500px; height:100px; display:none">
+                                <span id="key_a">A</span>
+                                <span id="key_b">B</span>
+                                <span id="key_c">C</span>
+                                <span id="key_d">D</span>
+                                <span id="key_e">E</span>
+                                <span id="key_f">F</span>
+                                <span id="key_g">G</span>
+                                <span id="key_h">H</span>
+                                <span id="key_i">I</span>
+                                <span id="key_j">J</span>
+                                <span id="key_k">K</span>
+                                <span id="key_l">L</span>
+                                <span id="key_m">M</span>
+                                <span id="key_n">N</span>
+                                <span id="key_o">O</span>
+                                <span id="key_p">P</span>
+                                <span id="key_q">Q</span>
+                                <span id="key_r">R</span>
+                                <span id="key_s">S</span>
+                                <span id="key_t">T</span>
+                                <span id="key_u">U</span>
+                                <span id="key_v">V</span>
+                                <span id="key_w">W</span>
+                                <span id="key_x">X</span>
+                                <span id="key_y">Y</span>
+                                <span id="key_z">Z</span>
+                            </span>
+                        </div>
                         <br />
-                        <h3>
-                            Please login to save your score and to see your history. >>
-                            <a href="https://www.listen-and-write.com/account/login?redirecturl=/audio/show/16584">Login</a>
-                        </h3>
-                        <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
-                    </center>
+                        <div id="logger"></div>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
                 </p>
-                <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div><br />
-                <div id="myscore"></div>
-                <i class="fa fa-share-alt"></i> Embed this listen-and-write audio clip to your blog or site.<br />
-                <input id='embedcode' value='<iframe src="https://www.listen-and-write.com/audio/previeweshow/16584" width="510" height="340" frameborder="0" scrolling="no"></iframe>'
-                       size=80 onClick='this.select();'><br />
-                Copy and paste the code above.
-
             </div>
+        </div>  <!-- player2 -->
+        <div class='command' style='width:100%;'>
+            &nbsp;<strong>Dictionary Lookup</strong><br />
+            <ul id="failedWord" style='display:inline-block;'></ul>
         </div>
+        <p>
+        <p>
+            <center>
+                <br />
+                <h3>
+                    Please login to save your score and to see your history. >>
+                    <a href="https://www.listen-and-write.com/account/login?redirecturl=/audio/show/16584">Login</a>
+                </h3>
+                <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
+            </center>
+        </p>
+        <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div><br />
+        <div id="myscore"></div>
+        <i class="fa fa-share-alt"></i> Embed this listen-and-write audio clip to your blog or site.<br />
+        <input id='embedcode' value='<iframe src="https://www.listen-and-write.com/audio/previeweshow/16584" width="510" height="340" frameborder="0" scrolling="no"></iframe>'
+               size=80 onClick='this.select();'><br />
+        Copy and paste the code above.
+
+    </div>
+</div>
     </div>
 </div>
 <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
@@ -218,5 +224,9 @@
             </figure>
         </div>
     </div>
+</div>
+<div id="dialog">
+        
+    <input type="hidden" value="&nbsp" id="s"/>
 </div>
 

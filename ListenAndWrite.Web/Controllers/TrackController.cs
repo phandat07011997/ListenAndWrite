@@ -29,5 +29,47 @@ namespace ListenAndWrite.Web.Controllers
                 Item = trackVM,
             }, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult CompareInput(string input, string answer)
+        {
+            int[,] F = new int[256, 256];
+            String[] inputs = input.ToLower().Split(' ');
+            String[] subStrs = answer.ToLower().Split(' ');
+            String[] saves = new String[256];
+            for (int i = 0; i <= subStrs.Length; i++)
+            {
+                F[i, 0] = 0;
+            }
+            for (int i = 0; i <= inputs.Length; i++)
+            {
+                F[0, i] = 0;
+            }
+
+            for (int i = 0; i < subStrs.Length; i++)
+            {
+                for (int j = 0; j < inputs.Length; j++)
+                {
+                    if (inputs[j] == subStrs[i])
+                    {
+                        F[i + 1, j + 1] = F[i, j] + 1;
+                        saves[F[i + 1, j + 1] - 1] = inputs[j];
+                    }
+                    else
+                    {
+                        F[i + 1, j + 1] = Math.Max(F[i + 1, j], F[i, j + 1]);
+                    }
+                }
+            }
+
+            String save = String.Join(" ", saves, 0, F[subStrs.Length, inputs.Length]);
+            
+            
+            return Json(new
+            {
+                SameWords = save
+
+              
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
