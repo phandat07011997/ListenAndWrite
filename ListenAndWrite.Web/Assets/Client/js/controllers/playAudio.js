@@ -6,7 +6,11 @@ var myAudio = document.getElementById('audio');
 var controller = 0;
 var flag = true;
 var sameWords='';
-var result='';
+var result = '';
+var scores = [];
+var score = 0;
+var numHint = 0;
+$("#submit").attr('disabled', 'disabled');
 $("#btn-next2").hide();
 $("#btn-score").hide();
 $('#hint').attr('disabled', 'disabled');
@@ -20,7 +24,20 @@ var audio = {
         audio.registerEvents();
     },
     registerEvents: function () {
+        $('#hint').click(function () {
+            var hintWords = answer.split(" ");
+            if (numHint < hintWords.length) {
+                $('#hintword').append(hintWords[numHint] + " ");
+                numHint++;
+            }
+            
+        });
         $('#btn-play').click(function () {
+            if (scores[currTrack-1] != undefined) {
+                $("#submit").attr('disabled', 'disabled');
+            }
+            else
+                $("#submit").removeAttr('disabled');
             $('#hint').removeAttr('disabled');
             if (flag) {
                 audio.getTrack(currTrack);
@@ -37,9 +54,11 @@ var audio = {
             $('#btn-play').removeAttr('disabled');
             $(this).attr('disabled', 'disabled');
             $('#hint').attr('disabled', 'disabled');
-            $('#hintword').html('DatPQ');
+            //$('#hintword').html('');
         });
         $('.btn-next').click(function () {
+            $('#result').html("");
+            
             $('#chartContainer').hide();
             flag = true;
             $('#hint').attr('disabled', 'disabled');
@@ -50,7 +69,7 @@ var audio = {
             if ((currTrack + '') < numTrack)
                 currTrack++;
             audio.getTrack(currTrack);   // lấy lại track hiện tại
-
+            flag = false;
             $('#currentTrack').html(currTrack);
             $('.btn-prev:disabled').removeAttr('disabled');               // 
             $('#btn-play').removeAttr('disabled');                      // hiện nút play
@@ -63,6 +82,8 @@ var audio = {
             $("#btn-next2").hide();
         });
         $('.btn-prev').click(function () {
+            $('#result').html("");
+            
             $('#chartContainer').hide();
             flag = true
             $('#hint').attr('disabled', 'disabled');
@@ -73,6 +94,7 @@ var audio = {
             if (currTrack > 1)
                 currTrack--;
             audio.getTrack(currTrack);
+            flag = false;
             $('#currentTrack').html(currTrack);
             $('.btn-next:disabled').removeAttr('disabled');
             $('#btn-play').removeAttr('disabled');
@@ -85,6 +107,7 @@ var audio = {
        $("#submit").click(function () {
             var input = $('#audioScript').val();
             var listILetters = input.toLowerCase().split("");
+            $('#dialog').html("");
             for (var i = 0; i < listILetters.length; i++) {
                 if (listILetters[i] == ' ')
                     $('#dialog').append("<span>&nbsp&nbsp&nbsp</span><input id=\"char"+i+"\" type=\"hidden\" value=\" \"/>");
@@ -130,6 +153,7 @@ var audio = {
     },
     getTrack: function (id) {
         $.ajax({
+            async: false,
             url: '/Track/LoadTrack',
             type: 'GET',
             dataType: 'json',
@@ -145,6 +169,12 @@ var audio = {
 
             }
         });
+        numHint = 0;
+        score = answer.split(" ").length;
+        if (scores[currTrack-1] != undefined) {
+            $("#submit").attr('disabled', 'disabled');
+            $('#result').append("<span style=\"color:blue;\">You have been answer this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] + "/10</span>");
+        }
         //var url = 'http://localhost:54941/Track/GetTrack?trackTitle=' + trackTitle;
         //$.ajaxSetup({ cache: false });       //to prevent cache
         //$.getJSON(url, function (data) {     // lấy dữ liệu từ CSDL
@@ -214,18 +244,19 @@ var audio = {
         var listWords = sameWords.split(" ");
         var i = 0;
         var j = 0;
+        result = "";
         for (i ; i < listIWords.length; i++) {
             if (j == listWords.length) {
-                result += "<span style=\"color:red\">" + listIWords[i] + " </span>";
+                result += "<span style=\"color:red;font-size: 32px\"><strike>" + listIWords[i] + "</strike> </span>";
             }
             for (j; j < listWords.length ; j++) {
                 if (listWords[j] == listIWords[i]) {
-                    result += "<span style=\"color:blue\">" + listIWords[i] + " </span>";
+                    result += "<span style=\"color:blue;font-size: 32px\">" + listIWords[i] + " </span>";
                     j++;
                     break;
                 }
                 else {
-                    result += "<span style=\"color:red\">" + listIWords[i] + " </span>";
+                    result += "<span style=\"color:red;font-size: 32px\"><strike>" + listIWords[i] + "</strike> </span>";
                     break;
                 }
 
@@ -245,11 +276,14 @@ var audio = {
         $('#stop').attr('disabled', 'disabled');
         $("#submit").attr('disabled', 'disabled');
 
-// điểm
-        let a = (score * 10 - faile) / score;
+        // điểm
+        
+        let a = (sameWords.split(" ").length - numHint) * 10 / score;
+        if (sameWords == "") a = 0;
         if (a < 0)
             a = 0;
         scores[currTrack - 1] = a;
+        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] + "/10</span>");
 
     }
     //compare: function (input, answer) {

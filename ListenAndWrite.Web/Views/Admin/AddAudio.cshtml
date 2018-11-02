@@ -95,7 +95,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="checkbox">
                             <label>
-                                @Html.CheckBoxFor(model => model.Status)
+                                @Html.CheckBoxFor(model => model.Status, htmlAttributes: new { @checked = true })
                                 Kích hoạt
                             </label>
                         </div>
