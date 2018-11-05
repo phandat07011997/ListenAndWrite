@@ -4,10 +4,14 @@ using Autofac.Integration.WebApi;
 using ListenAndWrite.Data;
 using ListenAndWrite.Data.Infrastructure;
 using ListenAndWrite.Data.Repositories;
+using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using System.Reflection;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -15,12 +19,13 @@ using System.Web.Mvc;
 
 namespace ListenAndWrite.Web.App_Start
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigAutofac(app);
+            ConfigureAuth(app);
         }
 
         private void ConfigAutofac(IAppBuilder app)
@@ -35,11 +40,11 @@ namespace ListenAndWrite.Web.App_Start
             builder.RegisterType<ListenAndWriteDbContext>().AsSelf().InstancePerRequest();
 
             //Asp.net Identity
-            //builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
-            //builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            //builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
-            //builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
-            //builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
+            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
             // Repositories
             builder.RegisterAssemblyTypes(typeof(AudioRepository).Assembly)
