@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AudioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ScoreController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -6182,6 +6183,7 @@
     <Content Include="Assets\Client\images\vendor\owl.video.play.html" />
     <Content Include="Assets\Admin\js\controllers\addTrack.js" />
     <Content Include="Assets\Admin\js\controllers\listAudio.js" />
+    <Content Include="Assets\Client\js\canvasjs.min.js" />
     <Content Include="Assets\Client\js\controllers\listAudio.js" />
     <Content Include="Assets\Client\js\controllers\playAudio.js" />
     <Content Include="Assets\Client\js\jquery.twbsPagination.min.js" />
@@ -6543,6 +6545,7 @@
     <Folder Include="Assets\Admin\libs\mustache\bin\" />
     <Folder Include="Infrastructure\Core\" />
     <Folder Include="Upload\" />
+    <Folder Include="Views\Score\" />
     <Folder Include="Views\Track\" />
   </ItemGroup>
   <ItemGroup>

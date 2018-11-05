@@ -12,10 +12,15 @@ namespace ListenAndWrite.Model.Models
         public int Id { set; get; }
 
         [Required]
+        [Column(TypeName =("nvarchar"))]
+        [MaxLength(128)]
+        public string UserId { set; get; }
+
+        [Required]
         public int AudioId { get; set; }
 
         [Required]
-        public int AudioScore { get; set; }
+        public float AudioScore { get; set; }
 
         public DateTime CreateDate { get; set; }
 

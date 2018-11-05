@@ -5,7 +5,7 @@ var answer = '';
 var myAudio = document.getElementById('audio');
 var controller = 0;
 var flag = true;
-var sameWords='';
+var sameWords = '';
 var result = '';
 var scores = [];
 var score = 0;
@@ -24,16 +24,119 @@ var audio = {
         audio.registerEvents();
     },
     registerEvents: function () {
+        $('#btn-score').click(function () {
+            $('#chartContainer').show();
+            var sum = 0;
+            for (let i in scores) {
+                if (scores[i] != undefined) {
+                    sum += scores[i];
+                }
+            }
+            if ($('#userId').val() != undefined) {
+                var scoreObj = {
+                    "UserId": $('#userId').val(),
+                    "AudioScore":(sum / numTrack * 10).toFixed(2),
+                    "AudioID": $('#audioId').val(),
+                };
+                $.ajax({
+                    async: false,
+                    url: "/Score/AddScore/",
+                    type: "POST",
+                    data: JSON.stringify(scoreObj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    error: function (respone) {
+                        console.log(respone);
+                    },
+                    success: function (respone) {
+                        console.log(respone);
+                    }
+                });
+                $.ajax({
+                    async: false,
+                    url: "/Score/GetLastScores/",
+                    data: JSON.stringify(scoreObj),
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var data = response.Items;
+                        var dataPoints = [];
+
+                        for (var i = data.length-1; i >=0 ; i--) {
+
+                            var dateString = data[i].CreateDate.substr(6);
+                            var currentTime = new Date(parseInt(dateString));
+                            var month = ("0" + (currentTime.getMonth() + 1)).slice(-2);
+                            var day = ("0" + currentTime.getDate()).slice(-2);
+                            var year = currentTime.getFullYear();
+                            var date = day + '/' + month + '/' + year;
+                            if (i > 0) {
+                                dataPoints.push({
+                                    label: date,
+                                    y: data[i].AudioScore
+                                });
+                            }
+                            else {
+                                dataPoints.push({
+                                    label: date,
+                                    y: data[i].AudioScore,
+                                    indexLabel: "NEW",
+                                    markerColor: "red",
+                                    markerType: "triangle"
+                                });
+                            }
+
+                        }
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            animationEnabled: true,
+                            theme: "light2",
+                            title: {
+                                text: "Score History"
+                            },
+                            axisX: {
+                                valueFormatString: "",
+                                crosshair: {
+                                    enabled: true,
+                                    snapToDataPoint: true
+                                }
+                            },
+                            axisY: {
+                                maximum: 10.5,
+                                includeZero: false
+                            },
+                            data: [{
+                                type: "line",
+                                color: "#33cc33",
+                                dataPoints: dataPoints
+                            }]
+                        });
+
+                        chart.render();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr, ajaxOptions, thrownError);
+                    }
+                });
+            }
+            
+            
+
+            $('#dialogFinish').html("<h1>Finish! Total score : <span style=\"color:red;\">" + (sum / numTrack * 10).toFixed(1) + "/10</span></h1>");
+            $('#dialogFinish').dialog("open");
+            $('#btn-score').attr('disabled', 'disabled');
+
+        });
         $('#hint').click(function () {
             var hintWords = answer.split(" ");
             if (numHint < hintWords.length) {
                 $('#hintword').append(hintWords[numHint] + " ");
                 numHint++;
             }
-            
+
         });
         $('#btn-play').click(function () {
-            if (scores[currTrack-1] != undefined) {
+            if (scores[currTrack - 1] != undefined) {
                 $("#submit").attr('disabled', 'disabled');
             }
             else
@@ -58,7 +161,7 @@ var audio = {
         });
         $('.btn-next').click(function () {
             $('#result').html("");
-            
+
             $('#chartContainer').hide();
             flag = true;
             $('#hint').attr('disabled', 'disabled');
@@ -83,7 +186,7 @@ var audio = {
         });
         $('.btn-prev').click(function () {
             $('#result').html("");
-            
+
             $('#chartContainer').hide();
             flag = true
             $('#hint').attr('disabled', 'disabled');
@@ -104,14 +207,14 @@ var audio = {
             $('div#answer').html('');
             $("#btn-next2").hide();
         });
-       $("#submit").click(function () {
+        $("#submit").click(function () {
             var input = $('#audioScript').val();
             var listILetters = input.toLowerCase().split("");
             $('#dialog').html("");
             for (var i = 0; i < listILetters.length; i++) {
                 if (listILetters[i] == ' ')
-                    $('#dialog').append("<span>&nbsp&nbsp&nbsp</span><input id=\"char"+i+"\" type=\"hidden\" value=\" \"/>");
-                else if(listILetters[i] == 'a')
+                    $('#dialog').append("<span>&nbsp&nbsp&nbsp</span><input id=\"char" + i + "\" type=\"hidden\" value=\" \"/>");
+                else if (listILetters[i] == 'a')
                     $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"a\">a</option><option value=\"â\">â</option><option value=\"à\">à</option></select>");
                 else if (listILetters[i] == 'e')
                     $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"e\">e</option><option value=\"é\">é</option><option value=\"è\">è</option></select>");
@@ -127,7 +230,7 @@ var audio = {
                     $('#dialog').append("<input id=\"char" + i + "\" type=\"text\" style=\"height:40px;width:40px\" value=\"" + listILetters[i] + "\"/>");
             }
             $('#dialog').dialog("open");
-            
+
 
             //last = input.charAt(input.length - 1);
             //if (res[0] == null) {
@@ -171,9 +274,9 @@ var audio = {
         });
         numHint = 0;
         score = answer.split(" ").length;
-        if (scores[currTrack-1] != undefined) {
+        if (scores[currTrack - 1] != undefined) {
             $("#submit").attr('disabled', 'disabled');
-            $('#result').append("<span style=\"color:blue;\">You have been answer this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] + "/10</span>");
+            $('#result').append("<span style=\"color:blue;\">You have been answer this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
         }
         //var url = 'http://localhost:54941/Track/GetTrack?trackTitle=' + trackTitle;
         //$.ajaxSetup({ cache: false });       //to prevent cache
@@ -195,13 +298,13 @@ var audio = {
         //loi = 0;
         //score = res.length - answer.split(" ").length + 1;
     },
-    playAudio:function(){
+    playAudio: function () {
         myAudio.currentTime = timeStart;        // bắt đầu chạy từ đoạn nào
         myAudio.play();
     },
     compareInput: function (input, answer) {
         $.ajax({
-            async:false,
+            async: false,
             url: '/Track/CompareInput',
             type: 'GET',
             dataType: 'json',
@@ -215,6 +318,19 @@ var audio = {
         });
     },
     initDialog: function () {
+        $('#dialogFinish').dialog({
+            width: 'auto',
+            resizable: true,
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                'OK': function () {
+                    $('#dialogFinish').html("");
+                    $('#dialogFinish').dialog('close');
+
+                }
+            }
+        });
         $('#dialog').dialog({
             width: 'auto',
             resizable: true,
@@ -225,7 +341,7 @@ var audio = {
                 'Cancel': function () {
                     $('#dialog').html("");
                     $('#dialog').dialog('close');
-                    
+
                 }
             }
         });
@@ -236,7 +352,7 @@ var audio = {
         var lenghtOfInput = input.length;
         var finalInput = '';
         for (var i = 0; i < lenghtOfInput; i++) {
-            
+
             var character = $('#char' + i).val();
             finalInput += character;
         }
@@ -277,13 +393,13 @@ var audio = {
         $("#submit").attr('disabled', 'disabled');
 
         // điểm
-        
-        let a = (sameWords.split(" ").length - numHint) * 10 / score;
+
+        let a = (sameWords.split(" ").length - numHint) / score;
         if (sameWords == "") a = 0;
         if (a < 0)
             a = 0;
         scores[currTrack - 1] = a;
-        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] + "/10</span>");
+        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
 
     }
     //compare: function (input, answer) {
@@ -317,8 +433,8 @@ var audio = {
     //    }
 
     //    String save = String.Join(" ", saves, 0, F[subStrs.Length, inputs.Length]);
-            
-            
+
+
     //}
 
 

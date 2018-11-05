@@ -1,4 +1,5 @@
 ﻿@model ListenAndWrite.Web.Models.AudioViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Choose";
     Layout = "~/Views/Shared/Layouts.cshtml";
@@ -6,6 +7,7 @@
 @section footerJS{
     <script src="~/Assets/Admin/libs/jquery-ui/jquery-ui.js"></script>
     <link href="~/Assets/Admin/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Assets/Client/js/canvasjs.min.js"></script>
     <script src="~/Assets/Client/js/controllers/playAudio.js"></script>
 }
 <div class="row" data-sticky_parent>
@@ -78,20 +80,38 @@
                                                         <div class="btn btn-primary btn-lg btn-next" id="btn-next2">
                                                             <span class="glyphicon glyphicon-plus"></span> Next track
                                                         </div>
-                                                        <div class="btn btn-primary btn-lg" id="btn-score">
-                                                            <span class="glyphicon glyphicon-certificate"></span><a href="#chartContainer" style="color: white">Xem điểm</a>
-                                                        </div>
+                                                        <button class="btn btn-primary btn-lg" id="btn-score">
+                                                            <span class="glyphicon glyphicon-certificate"></span><span style="color: white">Xem điểm</span>
+                                                        </button>
                                                     </div>
 
                                                 </div>
                                                 <i class='button medium icon'><i class='delete'></i><button type='button' id="stop">Stop</button></i>
                                                 <i class='button medium icon'><i class='check'></i><button id="hint" type='button'>Hint</button></i>
                                                 <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
-                                                <div><textarea cols="38" rows="1" id="audioScript" onkeyup="check(16584, 0)" style=""></textarea></div>
+                                                <div><textarea cols="38" rows="1" id="audioScript" style=""></textarea></div>
                                                 <div>
                                                     <button id="submit" class="btn-success">Submit</button>
                                                 </div>
                         <p id="result"></p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <input type="hidden" id="userId" value="@User.Identity.GetUserId()" />
+                            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                        }
+                        else
+                        {
+                            <h1 id="totalPoint"></h1>
+                            <center>
+                                <br />
+                                <h3>
+                                    Please login to save your score and to see your history. >>
+                                    <a href="/Account/Login/">Login</a>
+                                </h3>
+                                <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
+                            </center>
+                        }
+
                         <div>
                             <span id="keylog" style="width:500px; height:100px; display:none">
                                 <span id="key_a">A</span>
@@ -140,16 +160,11 @@
             &nbsp;<strong>Dictionary Lookup</strong><br />
             <ul id="failedWord" style='display:inline-block;'></ul>
         </div>
+
         <p>
-        <p>
-            <center>
-                <br />
-                <h3>
-                    Please login to save your score and to see your history. >>
-                    <a href="https://www.listen-and-write.com/account/login?redirecturl=/audio/show/16584">Login</a>
-                </h3>
-                <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
-            </center>
+
+
+
         </p>
         <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div><br />
         <div id="myscore"></div>
@@ -226,7 +241,6 @@
     </div>
 </div>
 <div id="dialog">
-        
-    <input type="hidden" value="&nbsp" id="s"/>
 </div>
-
+<div id="dialogFinish">
+</div>

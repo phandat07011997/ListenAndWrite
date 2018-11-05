@@ -85,6 +85,14 @@
     <Compile Include="Migrations\201811050730229_Add_Identity.Designer.cs">
       <DependentUpon>201811050730229_Add_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811051447541_Modify-Score-Table.cs" />
+    <Compile Include="Migrations\201811051447541_Modify-Score-Table.Designer.cs">
+      <DependentUpon>201811051447541_Modify-Score-Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811051714200_ModifyScore.cs" />
+    <Compile Include="Migrations\201811051714200_ModifyScore.Designer.cs">
+      <DependentUpon>201811051714200_ModifyScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AudioRepository.cs" />
@@ -113,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811050730229_Add_Identity.resx">
       <DependentUpon>201811050730229_Add_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811051447541_Modify-Score-Table.resx">
+      <DependentUpon>201811051447541_Modify-Score-Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811051714200_ModifyScore.resx">
+      <DependentUpon>201811051714200_ModifyScore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

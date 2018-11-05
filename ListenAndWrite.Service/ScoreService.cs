@@ -10,7 +10,7 @@ namespace ListenAndWrite.Service
     {
         Score Add(Score score);
 
-        IEnumerable<Score> GetListScoreByAudioId(int audioId);
+        IEnumerable<Score> GetListScoreByUserIdAndAudioId(int audioId,string userId);
 
         void Save();
     }
@@ -31,9 +31,9 @@ namespace ListenAndWrite.Service
             return _scoreRepository.Add(score);
         }
 
-        public IEnumerable<Score> GetListScoreByAudioId(int audioId)
+        public IEnumerable<Score> GetListScoreByUserIdAndAudioId(int audioId, string userId)
         {
-            return _scoreRepository.GetMulti(x => x.AudioId == audioId).OrderByDescending(y => y.CreateDate).Take(10);
+            return _scoreRepository.GetMulti(x => x.AudioId == audioId && x.UserId==userId).OrderByDescending(y => y.CreateDate).Take(10);
         }
 
         public void Save()
