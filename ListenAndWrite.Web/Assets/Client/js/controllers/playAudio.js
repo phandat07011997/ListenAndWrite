@@ -122,8 +122,9 @@ var audio = {
             
             
 
-            $('#dialogFinish').html("<h1>Finish! Total score : <span style=\"color:red;\">" + (sum / numTrack * 10).toFixed(1) + "/10</span></h1>");
+            $('#dialogFinish').html("<h1>Finish! Final score : <span style=\"color:red;\">" + (sum / numTrack * 10).toFixed(2) + "/10</span></h1>");
             $('#dialogFinish').dialog("open");
+            $('#totalScore').html("Final score : " + (sum / numTrack * 10).toFixed(2));
             $('#btn-score').attr('disabled', 'disabled');
 
         });
@@ -208,7 +209,7 @@ var audio = {
             $("#btn-next2").hide();
         });
         $("#submit").click(function () {
-            var input = $('#audioScript').val();
+            var input = audio.removeSpace($('#audioScript').val());
             var listILetters = input.toLowerCase().split("");
             $('#dialog').html("");
             for (var i = 0; i < listILetters.length; i++) {
@@ -276,8 +277,10 @@ var audio = {
         score = answer.split(" ").length;
         if (scores[currTrack - 1] != undefined) {
             $("#submit").attr('disabled', 'disabled');
-            $('#result').append("<span style=\"color:blue;\">You have been answer this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
+            $('#result').append("<span style=\"color:blue;\">You have answered this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
         }
+        if (currTrack == numTrack)          // nếu làm đến câu cuối thì hiện nút xem điểm
+            $('#btn-score').show();
         //var url = 'http://localhost:54941/Track/GetTrack?trackTitle=' + trackTitle;
         //$.ajaxSetup({ cache: false });       //to prevent cache
         //$.getJSON(url, function (data) {     // lấy dữ liệu từ CSDL
@@ -347,8 +350,7 @@ var audio = {
         });
     },
     finalSubmit: function () {
-        var input = $('#audioScript').val();
-        var listIWords = input.toLowerCase().split(" ");
+        var input = audio.removeSpace($('#audioScript').val());
         var lenghtOfInput = input.length;
         var finalInput = '';
         for (var i = 0; i < lenghtOfInput; i++) {
@@ -356,7 +358,9 @@ var audio = {
             var character = $('#char' + i).val();
             finalInput += character;
         }
+        $('#audioScript').val(finalInput);
         audio.compareInput(finalInput, answer);
+        var listIWords = finalInput.toLowerCase().split(" ");
         var listWords = sameWords.split(" ");
         var i = 0;
         var j = 0;
@@ -383,8 +387,6 @@ var audio = {
         $('#dialog').dialog('close');
         myAudio.pause();
         clearInterval(controller);
-        if (currTrack == numTrack)          // nếu làm đến câu cuối thì hiện nút xem điểm
-            $('#btn-score').show();
         if ((currTrack + '') < numTrack)
             $("#btn-next2").show();
         $('#goiy').html('');
@@ -401,6 +403,35 @@ var audio = {
         scores[currTrack - 1] = a;
         $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
 
+    },
+    removeSpace: function (input) {
+        if (input == undefined || input == '')
+            return '';
+        //Đổi chữ hoa thành chữ thường
+        var slug = input.toLowerCase();
+
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|\-|_/gi, '');
+        
+        ////Đổi nhiều ký tự trắng liên tiếp thành 1 
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\ \ \ \ \ /gi, ' ');
+        slug = slug.replace(/\ \ \ \ /gi, ' ');
+        slug = slug.replace(/\ \ \ /gi, ' ');
+        slug = slug.replace(/\ \ /gi, ' ');
+        //Xóa các ký tự trắng ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\ |\ \@|\@/gi, '');
+
+        return slug;
     }
     //compare: function (input, answer) {
     //    var F = [];
