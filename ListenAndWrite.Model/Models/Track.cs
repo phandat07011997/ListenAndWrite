@@ -14,18 +14,17 @@ namespace ListenAndWrite.Model.Models
         public int AudioId { get; set; }
 
         [Required]
-        [MaxLength(256)]
-        public string TrackTitle { get; set; }
+        public int Order { get; set; }
 
         [Required]
         [MaxLength(256)]
         public string Answer { get; set; }
 
         [Required]
-        public int TimeStart { get; set; }
+        public float TimeStart { get; set; }
 
         [Required]
-        public int Duration { get; set; }
+        public float Duration { get; set; }
 
         [ForeignKey("AudioId")]
         public virtual Audio Audio { set; get; }

@@ -148,7 +148,7 @@ var audio = {
                 flag = false;
             }
             audio.playAudio();        // chạy audio
-            controller = setInterval(audio.playAudio, (duration + 0.2) * 1000);       // lưu vị trí đang chạy của file audio
+            controller = setInterval(audio.playAudio, (duration) * 1000);       // lưu vị trí đang chạy của file audio
             $(this).attr('disabled', 'disabled');
             $('#stop').removeAttr('disabled');
         });
@@ -170,7 +170,7 @@ var audio = {
             $('#stop').attr('disabled', 'disabled');
             myAudio.pause();            // dừng phát
             clearInterval(controller);      // xóa dữ liệu
-            if ((currTrack + '') < numTrack)
+            if ((currTrack) < numTrack)
                 currTrack++;
             audio.getTrack(currTrack);   // lấy lại track hiện tại
             flag = false;
@@ -178,7 +178,7 @@ var audio = {
             $('.btn-prev:disabled').removeAttr('disabled');               // 
             $('#btn-play').removeAttr('disabled');                      // hiện nút play
             console.log(numTrack);
-            if ((currTrack + '') >= numTrack)                              // ẩn nút next nếu hết track
+            if ((currTrack) >= numTrack)                              // ẩn nút next nếu hết track
                 $(this).attr('disabled', 'disabled');
             $('textarea').val('');                                          // xóa hết câu trả lời
             $('div#answer').html('');                                       // xóa hết đáp án
@@ -216,19 +216,19 @@ var audio = {
                 if (listILetters[i] == ' ')
                     $('#dialog').append("<span>&nbsp&nbsp&nbsp</span><input id=\"char" + i + "\" type=\"hidden\" value=\" \"/>");
                 else if (listILetters[i] == 'a')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"a\">a</option><option value=\"â\">â</option><option value=\"à\">à</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"a\">a</option><option value=\"â\">â</option><option value=\"à\">à</option></select>");
                 else if (listILetters[i] == 'e')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"e\">e</option><option value=\"é\">é</option><option value=\"è\">è</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"e\">e</option><option value=\"é\">é</option><option value=\"è\">è</option></select>");
                 else if (listILetters[i] == 's')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"s\">s</option><option value=\"ç\">ç</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"s\">s</option><option value=\"ç\">ç</option></select>");
                 else if (listILetters[i] == 'u')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"u\">u</option><option value=\"ù\">ù</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"u\">u</option><option value=\"ù\">ù</option></select>");
                 else if (listILetters[i] == 'o')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"o\">o</option><option value=\"ô\">ô</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"o\">o</option><option value=\"ô\">ô</option></select>");
                 else if (listILetters[i] == 'i')
-                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:40px;height:40px;\"><option value=\"i\">i</option><option value=\"î\">î</option></select>");
+                    $('#dialog').append("<select id=\"char" + i + "\" style=\"width:35px;height:30px;\"><option value=\"i\">i</option><option value=\"î\">î</option></select>");
                 else
-                    $('#dialog').append("<input id=\"char" + i + "\" type=\"text\" style=\"height:40px;width:40px\" value=\"" + listILetters[i] + "\"/>");
+                    $('#dialog').append("<input id=\"char" + i + "\" disabled type=\"text\" style=\"height:30px;width:20px\" value=\"" + listILetters[i] + "\"/>");
             }
             $('#dialog').dialog("open");
 
@@ -401,7 +401,7 @@ var audio = {
         if (a < 0)
             a = 0;
         scores[currTrack - 1] = a;
-        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
+        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + (scores[currTrack - 1] * 10).toFixed(2) + "/10</span>");
 
     },
     removeSpace: function (input) {
@@ -419,7 +419,7 @@ var audio = {
         slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
         slug = slug.replace(/đ/gi, 'd');
         //Xóa các ký tự đặt biệt
-        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|\-|_/gi, '');
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\"|\:|\;|_/gi, '');
         
         ////Đổi nhiều ký tự trắng liên tiếp thành 1 
         //Phòng trường hợp người nhập vào quá nhiều ký tự trắng

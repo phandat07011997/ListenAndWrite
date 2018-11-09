@@ -30,7 +30,7 @@ namespace ListenAndWrite.Web.Infrastructure.Extensions
             track.Id = trackVM.Id;
             track.AudioId = trackVM.AudioId;
             track.Answer = trackVM.Answer;
-            track.TrackTitle = trackVM.TrackTitle;
+            track.Order = trackVM.Order;
             track.TimeStart = trackVM.TimeStart;
             track.Duration = trackVM.Duration;
         }

@@ -75,7 +75,7 @@
                 var data = response.data;
                 $(data).each(function () {
                     var tr = $('<tr></tr>')
-                    tr.append('<td>' + this.TrackTitle + '</td>')
+                    tr.append('<td>' + this.Order + '</td>')
                     tr.append('<td>' + this.TimeStart + '</td>')
                     tr.append('<td>' + this.Duration + '</td>')
                     tr.append('<td>' + this.Answer + '</td>')

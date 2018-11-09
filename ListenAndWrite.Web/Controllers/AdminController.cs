@@ -68,7 +68,7 @@ namespace ListenAndWrite.Web.Controllers
         {
             var num = _trackService.GetListTrackByAudioId(track.AudioId).Count() + 1;
             var audio = _audioService.GetById(track.AudioId);
-            track.TrackTitle = track.AudioId + "_" + audio.AudioTitle + "_track_" + num;
+            track.Order = num;
             _trackService.Add(track);
             _trackService.Save();
             return Json(
@@ -95,7 +95,7 @@ namespace ListenAndWrite.Web.Controllers
             int totalRow = 0;
             var audioModel = _audioService.GetLastestAudio(page, pageSize, out totalRow);
             var audioViewModel = Mapper.Map<IEnumerable<Audio>, IEnumerable<AudioViewModel>>(audioModel);
-            
+
             return Json(new
             {
                 Items = audioViewModel,
@@ -120,7 +120,7 @@ namespace ListenAndWrite.Web.Controllers
             //file.InputStream.Dispose();
             //file.InputStream = null;
 
-            
+
             try
             {
                 if (file != null && file.ContentLength > 0)

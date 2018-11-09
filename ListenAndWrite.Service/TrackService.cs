@@ -17,7 +17,7 @@ namespace ListenAndWrite.Service
 
         void DeleteByAudioId(int audioId);
 
-        Track GetTrackByTitle(string trackTitle);
+        
 
         IEnumerable<Track> GetListTrackByAudioId(int audioId);
 
@@ -59,14 +59,10 @@ namespace ListenAndWrite.Service
 
         public Track GetTrackByAudioId(int order, int audioId)
         {
-            var model = _trackRepository.GetMulti(x => x.AudioId == audioId).OrderBy(y=>y.TrackTitle).Skip(order-1).Take(1);
-            return model.First();
+            return _trackRepository.GetSingleByCondition(x => x.AudioId == audioId && x.Order == order);
         }
 
-        public Track GetTrackByTitle(string trackTitle)
-        {
-            return _trackRepository.GetSingleByCondition(x => x.TrackTitle == trackTitle);
-        }
+        
 
         public void Save()
         {

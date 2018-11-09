@@ -9,10 +9,10 @@ namespace ListenAndWrite.Web.Models
     {
         public int Id { set; get; }
         public int AudioId { get; set; }
-        public string TrackTitle { get; set; }
+        public int Order { get; set; }
         public string Answer { get; set; }
-        public int TimeStart { get; set; }
-        public int Duration { get; set; }
+        public float TimeStart { get; set; }
+        public float Duration { get; set; }
         public virtual AudioViewModel Audio { set; get; }
     }
 }
