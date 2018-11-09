@@ -10,6 +10,7 @@ var result = '';
 var scores = [];
 var score = 0;
 var numHint = 0;
+var numSpellingMistake = 0;
 $("#submit").attr('disabled', 'disabled');
 $("#btn-next2").hide();
 $("#btn-score").hide();
@@ -35,7 +36,7 @@ var audio = {
             if ($('#userId').val() != undefined) {
                 var scoreObj = {
                     "UserId": $('#userId').val(),
-                    "AudioScore":(sum / numTrack * 10).toFixed(2),
+                    "AudioScore": (sum / numTrack * 10).toFixed(2),
                     "AudioID": $('#audioId').val(),
                 };
                 $.ajax({
@@ -63,7 +64,7 @@ var audio = {
                         var data = response.Items;
                         var dataPoints = [];
 
-                        for (var i = data.length-1; i >=0 ; i--) {
+                        for (var i = data.length - 1; i >= 0; i--) {
 
                             var dateString = data[i].CreateDate.substr(6);
                             var currentTime = new Date(parseInt(dateString));
@@ -86,7 +87,6 @@ var audio = {
                                     markerType: "triangle"
                                 });
                             }
-
                         }
                         var chart = new CanvasJS.Chart("chartContainer", {
                             animationEnabled: true,
@@ -119,9 +119,6 @@ var audio = {
                     }
                 });
             }
-            
-            
-
             $('#dialogFinish').html("<h1>Finish! Final score : <span style=\"color:red;\">" + (sum / numTrack * 10).toFixed(2) + "/10</span></h1>");
             $('#dialogFinish').dialog("open");
             $('#totalScore').html("Final score : " + (sum / numTrack * 10).toFixed(2));
@@ -158,7 +155,7 @@ var audio = {
             $('#btn-play').removeAttr('disabled');
             $(this).attr('disabled', 'disabled');
             $('#hint').attr('disabled', 'disabled');
-            //$('#hintword').html('');
+            
         });
         $('.btn-next').click(function () {
             $('#result').html("");
@@ -231,27 +228,7 @@ var audio = {
                     $('#dialog').append("<input id=\"char" + i + "\" disabled type=\"text\" style=\"height:30px;width:20px\" value=\"" + listILetters[i] + "\"/>");
             }
             $('#dialog').dialog("open");
-
-
-            //last = input.charAt(input.length - 1);
-            //if (res[0] == null) {
-            //    myAudio.pause();            // dừng phát
-            //    clearInterval(controller);
-            //    if (currTrack == numTrack)          // nếu làm đến câu cuối thì hiện nút xem điểm
-            //        $('#btn-score').show();
-            //    if ((currTrack + '') < numTrack)
-            //        $("#btn-next2").show();
-            //    $('#goiy').html('');
-            //    flag = true;
-            //    $('#stop').attr('disabled', 'disabled');
-
-            //    // điểm
-            //    let a = (score * 10 - faile) / score;
-            //    if (a < 0)
-            //        a = 0;
-            //    scores[currTrack - 1] = a;
-            //    console.log(scores[currTrack - 1]);
-            //}
+            
         });
 
     },
@@ -273,6 +250,7 @@ var audio = {
 
             }
         });
+        numSpellingMistake = 0;
         numHint = 0;
         score = answer.split(" ").length;
         if (scores[currTrack - 1] != undefined) {
@@ -281,25 +259,7 @@ var audio = {
         }
         if (currTrack == numTrack)          // nếu làm đến câu cuối thì hiện nút xem điểm
             $('#btn-score').show();
-        //var url = 'http://localhost:54941/Track/GetTrack?trackTitle=' + trackTitle;
-        //$.ajaxSetup({ cache: false });       //to prevent cache
-        //$.getJSON(url, function (data) {     // lấy dữ liệu từ CSDL
-        //timeStart = data.TimeStart;
-        //duration = data.Duration;
-        //title = data.AudioTitle;
-        //answer = data.Answer;
-        //});
 
-        //res = answer.toLowerCase().split("");
-        //res2 = answer.toLowerCase().split("");
-        //s = '';
-        //index = res.indexOf(' ');
-        //count = 0;
-        //str = GoiY(index);
-        //id = '';
-        //faile = 0;
-        //loi = 0;
-        //score = res.length - answer.split(" ").length + 1;
     },
     playAudio: function () {
         myAudio.currentTime = timeStart;        // bắt đầu chạy từ đoạn nào
@@ -359,21 +319,105 @@ var audio = {
             finalInput += character;
         }
         $('#audioScript').val(finalInput);
-        audio.compareInput(finalInput, answer);
+
+        var fixedWords = finalInput.toLowerCase().split(" ");
+        for (var i = 0; i < fixedWords.length; i++) {
+            if ((fixedWords[i] == "je") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "j'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+            if ((fixedWords[i] == "le") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "l'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+            if ((fixedWords[i] == "la") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "l'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+            if ((fixedWords[i] == "de") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "d'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+            if ((fixedWords[i] == "du") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "d'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+            if ((fixedWords[i] == "ne") && (fixedWords[i + 1].startsWith("a") || fixedWords[i + 1].startsWith("u") || fixedWords[i + 1].startsWith("e") || fixedWords[i + 1].startsWith("o") || fixedWords[i + 1].startsWith("i") || fixedWords[i + 1].startsWith("ha") || fixedWords[i + 1].startsWith("hu") || fixedWords[i + 1].startsWith("he") || fixedWords[i + 1].startsWith("ho") || fixedWords[i + 1].startsWith("hi"))) {
+                fixedWords[i] = "n'" + fixedWords[i + 1];
+                fixedWords.splice(i + 1, 1);
+            }
+
+
+        }
+        audio.compareInput(fixedWords.join(" "), answer);
         var listIWords = finalInput.toLowerCase().split(" ");
         var listWords = sameWords.split(" ");
         var i = 0;
         var j = 0;
         result = "";
-        for (i ; i < listIWords.length; i++) {
+        for (i; i < listIWords.length; i++) {
             if (j == listWords.length) {
                 result += "<span style=\"color:red;font-size: 32px\"><strike>" + listIWords[i] + "</strike> </span>";
             }
-            for (j; j < listWords.length ; j++) {
+            for (j; j < listWords.length; j++) {
                 if (listWords[j] == listIWords[i]) {
                     result += "<span style=\"color:blue;font-size: 32px\">" + listIWords[i] + " </span>";
                     j++;
                     break;
+                }
+                if ((listIWords[i] == "je") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("j'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
+                }
+                if ((listIWords[i] == "le") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("l'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
+                }
+                if ((listIWords[i] == "la") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("l'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
+                }
+                if ((listIWords[i] == "de") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("d'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
+                }
+                if ((listIWords[i] == "du") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("d'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
+                }
+                if ((listIWords[i] == "ne") && (listIWords[i + 1].startsWith("u") || listIWords[i + 1].startsWith("e") || listIWords[i + 1].startsWith("o") || listIWords[i + 1].startsWith("a") || listIWords[i + 1].startsWith("i") || listIWords[i + 1].startsWith("hu") || listIWords[i + 1].startsWith("he") || listIWords[i + 1].startsWith("ho") || listIWords[i + 1].startsWith("ha") || listIWords[i + 1].startsWith("hi"))) {
+                    if ("n'" + listIWords[i + 1] == listWords[j]) {
+                        result += "<span style=\"color:yellow;font-size: 32px\"><strike>" + listIWords[i] + " " + listIWords[i + 1] + "</strike> </span>";
+                        listIWords.splice(i + 1, 1);
+                        numSpellingMistake++;
+                        j++;
+                        break;
+                    }
                 }
                 else {
                     result += "<span style=\"color:red;font-size: 32px\"><strike>" + listIWords[i] + "</strike> </span>";
@@ -396,7 +440,7 @@ var audio = {
 
         // điểm
 
-        let a = (sameWords.split(" ").length - numHint) / score;
+        let a = (sameWords.split(" ").length - numHint - 0.5 * numSpellingMistake) / score;
         if (sameWords == "") a = 0;
         if (a < 0)
             a = 0;
@@ -410,17 +454,8 @@ var audio = {
         //Đổi chữ hoa thành chữ thường
         var slug = input.toLowerCase();
 
-        //Đổi ký tự có dấu thành không dấu
-        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-        slug = slug.replace(/đ/gi, 'd');
-        //Xóa các ký tự đặt biệt
-        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\"|\:|\;|_/gi, '');
-        
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\"|\:|\;|_/gi, ' ');
+
         ////Đổi nhiều ký tự trắng liên tiếp thành 1 
         //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
         slug = slug.replace(/\ \ \ \ \ /gi, ' ');
@@ -433,41 +468,6 @@ var audio = {
 
         return slug;
     }
-    //compare: function (input, answer) {
-    //    var F = [];
-    //    var inputs = input.toLower().split(' ');
-    //    var subStrs = answer.toLower().split(' ');
-    //    var saves = [];
-    //    for (int q = 0; q <= subStrs.Length; q++)
-    //    {
-    //        F[i, 0] = 0;
-    //    }
-    //    for (int i = 0; i <= inputs.Length; i++)
-    //    {
-    //        F[0, i] = 0;
-    //    }
-
-    //    for (int i = 0; i < subStrs.Length; i++)
-    //    {
-    //        for (int j = 0; j < inputs.Length; j++)
-    //        {
-    //            if (inputs[j] == subStrs[i])
-    //            {
-    //                F[i + 1, j + 1] = F[i, j] + 1;
-    //                saves[F[i + 1, j + 1] - 1] = inputs[j];
-    //            }
-    //            else
-    //            {
-    //                F[i + 1, j + 1] = Math.Max(F[i + 1, j], F[i, j + 1]);
-    //            }
-    //        }
-    //    }
-
-    //    String save = String.Join(" ", saves, 0, F[subStrs.Length, inputs.Length]);
-
-
-    //}
-
 
 }
 audio.init();
