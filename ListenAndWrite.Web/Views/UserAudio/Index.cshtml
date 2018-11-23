@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ListenAndWrite.Web.Models.UserAudioViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+@section footerJS{
+    <script src="~/Assets/Admin/libs/jquery-ui/jquery-ui.js"></script>
+    <link href="~/Assets/Admin/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <script src="~/Assets/Client/js/controllers/userAudio.js"></script>
+}
+<h2>My audio</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
+@if (Model.Count() == 0)
+{
+    <h1>Empty</h1>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Play
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AudioTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn btn-primary btn-play" data-path="@item.Path" data-text="@item.Text">Play</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AudioTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this audio?');" })
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+<div id="dialogPlay" data-text="">
+</div>
+
+
+
+
+

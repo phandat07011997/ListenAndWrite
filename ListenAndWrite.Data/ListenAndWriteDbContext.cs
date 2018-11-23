@@ -10,7 +10,7 @@ namespace ListenAndWrite.Data
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
-
+        public DbSet<UserAudio> UserAudios { set; get; }
         public DbSet<Audio> Audios { set; get; }
         public DbSet<Track> Tracks { set; get; }
         public DbSet<Score> Scores { set; get; }

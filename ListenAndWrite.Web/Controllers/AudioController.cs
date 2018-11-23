@@ -1,23 +1,21 @@
 ﻿using AutoMapper;
 using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
-using ListenAndWrite.Web.Infrastructure.Extensions;
 using ListenAndWrite.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ListenAndWrite.Web.Controllers
 {
     public class AudioController : Controller
     {
-        IAudioService _audioService;
+        private IAudioService _audioService;
+
         public AudioController(IAudioService audioService)
         {
             this._audioService = audioService;
         }
+
         public ActionResult Level(int? level)
         {
             var listLevel = _audioService.GetListLevel();
@@ -25,13 +23,15 @@ namespace ListenAndWrite.Web.Controllers
                 ViewBag.Level = level;
             return View(listLevel);
         }
+
         public ActionResult Choose(int id)
         {
-            var audioModel=_audioService.GetById(id);
+            var audioModel = _audioService.GetById(id);
             audioModel.NumTrack = _audioService.GetTotalTrack(id);
-            var audioViewModel = Mapper.Map<Audio,AudioViewModel>(audioModel);
+            var audioViewModel = Mapper.Map<Audio, AudioViewModel>(audioModel);
             return View(audioViewModel);
         }
+
         [HttpGet]
         public JsonResult LoadAudio(int page, int pageSize, int? level)
         {

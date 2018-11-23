@@ -33,10 +33,11 @@ var audio = {
                     sum += scores[i];
                 }
             }
+           
             if ($('#userId').val() != undefined) {
                 var scoreObj = {
                     "UserId": $('#userId').val(),
-                    "AudioScore": (sum / numTrack * 10).toFixed(2),
+                    "AudioScore": parseFloat((sum / numTrack * 10).toFixed(2)),
                     "AudioID": $('#audioId').val(),
                 };
                 $.ajax({
@@ -282,6 +283,7 @@ var audio = {
     },
     initDialog: function () {
         $('#dialogFinish').dialog({
+            open: function (event, ui) { jQuery('.ui-dialog-titlebar-close').hide(); },
             width: 'auto',
             resizable: true,
             autoOpen: false,
@@ -295,6 +297,7 @@ var audio = {
             }
         });
         $('#dialog').dialog({
+            open: function (event, ui) { jQuery('.ui-dialog-titlebar-close').hide(); },
             width: 'auto',
             resizable: true,
             autoOpen: false,

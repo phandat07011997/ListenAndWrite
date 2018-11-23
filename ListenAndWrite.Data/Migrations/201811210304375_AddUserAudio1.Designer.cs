@@ -7,13 +7,13 @@ namespace ListenAndWrite.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class modifyTrack_v2 : IMigrationMetadata
+    public sealed partial class AddUserAudio1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(modifyTrack_v2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserAudio1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811090515026_modifyTrack_v2"; }
+            get { return "201811210304375_AddUserAudio1"; }
         }
         
         string IMigrationMetadata.Source

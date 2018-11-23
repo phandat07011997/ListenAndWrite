@@ -8,6 +8,8 @@ namespace ListenAndWrite.Web.Mappings
     {
         public static void Configure()
         {
+
+            Mapper.CreateMap<UserAudio, UserAudioViewModel>();
             Mapper.CreateMap<Audio, AudioViewModel>();
             Mapper.CreateMap<Track, TrackViewModel>();
             Mapper.CreateMap<Score, ScoreViewModel>();

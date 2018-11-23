@@ -3,10 +3,29 @@ namespace ListenAndWrite.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Add_Identity : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Audios",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        AudioTitle = c.String(nullable: false, maxLength: 256),
+                        Path = c.String(nullable: false, maxLength: 256),
+                        Level = c.Int(nullable: false),
+                        Duration = c.Int(nullable: false),
+                        NumTrack = c.Int(),
+                        Description = c.String(maxLength: 500),
+                        CreatedBy = c.String(maxLength: 256),
+                        CreatedDate = c.DateTime(nullable: false),
+                        UpdateBy = c.String(maxLength: 256),
+                        UpdateDate = c.DateTime(),
+                        Status = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.IdentityRoles",
                 c => new
@@ -30,6 +49,35 @@ namespace ListenAndWrite.Data.Migrations
                 .ForeignKey("dbo.ApplicationUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.IdentityRole_Id)
                 .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
+                "dbo.Scores",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        AudioId = c.Int(nullable: false),
+                        AudioScore = c.Single(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Audios", t => t.AudioId, cascadeDelete: true)
+                .Index(t => t.AudioId);
+            
+            CreateTable(
+                "dbo.Tracks",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        AudioId = c.Int(nullable: false),
+                        Order = c.Int(nullable: false),
+                        Answer = c.String(nullable: false, maxLength: 256),
+                        TimeStart = c.Single(nullable: false),
+                        Duration = c.Single(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Audios", t => t.AudioId, cascadeDelete: true)
+                .Index(t => t.AudioId);
             
             CreateTable(
                 "dbo.ApplicationUsers",
@@ -84,16 +132,23 @@ namespace ListenAndWrite.Data.Migrations
             DropForeignKey("dbo.IdentityUserRoles", "ApplicationUser_Id", "dbo.ApplicationUsers");
             DropForeignKey("dbo.IdentityUserLogins", "ApplicationUser_Id", "dbo.ApplicationUsers");
             DropForeignKey("dbo.IdentityUserClaims", "ApplicationUser_Id", "dbo.ApplicationUsers");
+            DropForeignKey("dbo.Tracks", "AudioId", "dbo.Audios");
+            DropForeignKey("dbo.Scores", "AudioId", "dbo.Audios");
             DropForeignKey("dbo.IdentityUserRoles", "IdentityRole_Id", "dbo.IdentityRoles");
             DropIndex("dbo.IdentityUserLogins", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaims", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.Tracks", new[] { "AudioId" });
+            DropIndex("dbo.Scores", new[] { "AudioId" });
             DropIndex("dbo.IdentityUserRoles", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRoles", new[] { "IdentityRole_Id" });
             DropTable("dbo.IdentityUserLogins");
             DropTable("dbo.IdentityUserClaims");
             DropTable("dbo.ApplicationUsers");
+            DropTable("dbo.Tracks");
+            DropTable("dbo.Scores");
             DropTable("dbo.IdentityUserRoles");
             DropTable("dbo.IdentityRoles");
+            DropTable("dbo.Audios");
         }
     }
 }

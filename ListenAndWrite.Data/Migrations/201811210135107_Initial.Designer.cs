@@ -7,13 +7,13 @@ namespace ListenAndWrite.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ModifyScore : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ModifyScore));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811051714200_ModifyScore"; }
+            get { return "201811210135107_Initial"; }
         }
         
         string IMigrationMetadata.Source

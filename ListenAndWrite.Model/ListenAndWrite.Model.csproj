@@ -61,6 +61,7 @@
     <Compile Include="Models\Audio.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\Track.cs" />
+    <Compile Include="Models\UserAudio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

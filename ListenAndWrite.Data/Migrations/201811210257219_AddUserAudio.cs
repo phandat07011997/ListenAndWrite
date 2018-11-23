@@ -3,16 +3,14 @@ namespace ListenAndWrite.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ModifyUpdateDate : DbMigration
+    public partial class AddUserAudio : DbMigration
     {
         public override void Up()
         {
-            AlterColumn("dbo.Audios", "UpdateDate", c => c.DateTime());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.Audios", "UpdateDate", c => c.DateTime(nullable: false));
         }
     }
 }

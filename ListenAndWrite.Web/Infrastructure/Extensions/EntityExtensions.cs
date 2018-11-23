@@ -9,6 +9,17 @@ namespace ListenAndWrite.Web.Infrastructure.Extensions
 {
     public static class EntityExtensions
     {
+        public static void UpdateUserAudio(this UserAudio userAudio, UserAudioViewModel userAudioVM)
+        {
+            userAudio.Id = userAudioVM.Id;
+            userAudio.UserId = userAudioVM.UserId;
+            userAudio.AudioTitle = userAudioVM.AudioTitle;
+            userAudio.Path = userAudioVM.Path;
+            userAudio.CreatedDate = userAudioVM.CreatedDate;
+            userAudio.Text = userAudioVM.Text;
+
+
+        }
         public static void UpdateAudio(this Audio audio, AudioViewModel audioVM)
         {
             audio.Id = audioVM.Id;
@@ -25,7 +36,7 @@ namespace ListenAndWrite.Web.Infrastructure.Extensions
             audio.NumTrack = audioVM.NumTrack;
 
         }
-        public static void UpdateTrack(this Track track , TrackViewModel trackVM)
+        public static void UpdateTrack(this Track track, TrackViewModel trackVM)
         {
             track.Id = trackVM.Id;
             track.AudioId = trackVM.AudioId;

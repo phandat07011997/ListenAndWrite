@@ -65,47 +65,24 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="ListenAndWriteDbContext.cs" />
-    <Compile Include="Migrations\201809121553366_Initial.cs" />
-    <Compile Include="Migrations\201809121553366_Initial.Designer.cs">
-      <DependentUpon>201809121553366_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201811210135107_Initial.cs" />
+    <Compile Include="Migrations\201811210135107_Initial.Designer.cs">
+      <DependentUpon>201811210135107_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809170949216_ModifyUpdateDate.cs" />
-    <Compile Include="Migrations\201809170949216_ModifyUpdateDate.Designer.cs">
-      <DependentUpon>201809170949216_ModifyUpdateDate.cs</DependentUpon>
+    <Compile Include="Migrations\201811210257219_AddUserAudio.cs" />
+    <Compile Include="Migrations\201811210257219_AddUserAudio.Designer.cs">
+      <DependentUpon>201811210257219_AddUserAudio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809180659508_AddNumTrack.cs" />
-    <Compile Include="Migrations\201809180659508_AddNumTrack.Designer.cs">
-      <DependentUpon>201809180659508_AddNumTrack.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809181252170_ModifyNumTrackField.cs" />
-    <Compile Include="Migrations\201809181252170_ModifyNumTrackField.Designer.cs">
-      <DependentUpon>201809181252170_ModifyNumTrackField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811050730229_Add_Identity.cs" />
-    <Compile Include="Migrations\201811050730229_Add_Identity.Designer.cs">
-      <DependentUpon>201811050730229_Add_Identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811051447541_Modify-Score-Table.cs" />
-    <Compile Include="Migrations\201811051447541_Modify-Score-Table.Designer.cs">
-      <DependentUpon>201811051447541_Modify-Score-Table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811051714200_ModifyScore.cs" />
-    <Compile Include="Migrations\201811051714200_ModifyScore.Designer.cs">
-      <DependentUpon>201811051714200_ModifyScore.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811090357218_modifyTrack.cs" />
-    <Compile Include="Migrations\201811090357218_modifyTrack.Designer.cs">
-      <DependentUpon>201811090357218_modifyTrack.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811090515026_modifyTrack_v2.cs" />
-    <Compile Include="Migrations\201811090515026_modifyTrack_v2.Designer.cs">
-      <DependentUpon>201811090515026_modifyTrack_v2.cs</DependentUpon>
+    <Compile Include="Migrations\201811210304375_AddUserAudio1.cs" />
+    <Compile Include="Migrations\201811210304375_AddUserAudio1.Designer.cs">
+      <DependentUpon>201811210304375_AddUserAudio1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AudioRepository.cs" />
     <Compile Include="Repositories\ScoreRepository.cs" />
     <Compile Include="Repositories\TrackRepository.cs" />
+    <Compile Include="Repositories\UserAudioRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -115,39 +92,21 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809121553366_Initial.resx">
-      <DependentUpon>201809121553366_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809170949216_ModifyUpdateDate.resx">
-      <DependentUpon>201809170949216_ModifyUpdateDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809180659508_AddNumTrack.resx">
-      <DependentUpon>201809180659508_AddNumTrack.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809181252170_ModifyNumTrackField.resx">
-      <DependentUpon>201809181252170_ModifyNumTrackField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811050730229_Add_Identity.resx">
-      <DependentUpon>201811050730229_Add_Identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051447541_Modify-Score-Table.resx">
-      <DependentUpon>201811051447541_Modify-Score-Table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051714200_ModifyScore.resx">
-      <DependentUpon>201811051714200_ModifyScore.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811090357218_modifyTrack.resx">
-      <DependentUpon>201811090357218_modifyTrack.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811090515026_modifyTrack_v2.resx">
-      <DependentUpon>201811090515026_modifyTrack_v2.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ListenAndWrite.Model\ListenAndWrite.Model.csproj">
       <Project>{95df06e5-4c32-471b-8c39-326e78514287}</Project>
       <Name>ListenAndWrite.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811210135107_Initial.resx">
+      <DependentUpon>201811210135107_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811210257219_AddUserAudio.resx">
+      <DependentUpon>201811210257219_AddUserAudio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811210304375_AddUserAudio1.resx">
+      <DependentUpon>201811210304375_AddUserAudio1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

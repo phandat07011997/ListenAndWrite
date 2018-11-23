@@ -22,7 +22,7 @@
     <div class="col-lg-8 content-wrapper">
         <div class="posts-box3 archive-box">
             <div class="posts-box3__top">
-                <h2 class="posts-box3__top__title">Latest audios: @(ViewBag.Level != null ? " Level " + ViewBag.Level : "") </h2>
+                <h2 class="posts-box3__top__title">@ListenAndWrite.Web.Resources.HomeTexts.LatestAudio: @(ViewBag.Level != null ? " "+ @ListenAndWrite.Web.Resources.HomeTexts.Level+" " + ViewBag.Level : "") </h2>
 
             </div>
             <input type="hidden" id="level" value="@ViewBag.Level" />
@@ -65,7 +65,7 @@
             <div class="widget widget--transparent-box img-banner">
                 <figure>
                     <div class="m-post-content m-post-content--nyc">
-                        <b>Levels</b>
+                        <b>@ListenAndWrite.Web.Resources.HomeTexts.Level</b>
                         <div class="post-tags">
                             <div class="tags-wrap">
                                 @foreach (var level in Model)

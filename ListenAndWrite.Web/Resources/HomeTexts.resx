@@ -117,10 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Target" xml:space="preserve">
-    <value>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</value>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Trở lại trang chủ</value>
   </data>
-  <data name="DefaultSchema" xml:space="preserve">
-    <value>dbo</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Nhập lại mật khẩu</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Tạo tài khoản</value>
+  </data>
+  <data name="FinalScore" xml:space="preserve">
+    <value>Xem tổng điểm</value>
+  </data>
+  <data name="Hint" xml:space="preserve">
+    <value>Trợ giúp</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="LatestAudio" xml:space="preserve">
+    <value>Bài nghe mới nhất</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Độ khó</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="MyAudio" xml:space="preserve">
+    <value>Bài nghe của tôi</value>
+  </data>
+  <data name="NextTrack" xml:space="preserve">
+    <value>Câu tiếp theo</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Dừng</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Phát</value>
+  </data>
+  <data name="PleaseLogin" xml:space="preserve">
+    <value>Đăng nhập để lưu điểm và xem kết quả trước đây</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Đăng ký tài khoản</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Nộp</value>
+  </data>
+  <data name="SubmitAudio" xml:space="preserve">
+    <value>Tải lên bài nghe của bạn</value>
+  </data>
+  <data name="Track" xml:space="preserve">
+    <value>Câu</value>
   </data>
 </root>

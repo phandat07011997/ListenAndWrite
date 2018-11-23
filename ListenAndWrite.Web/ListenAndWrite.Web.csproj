@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,8 +209,10 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AudioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ScoreController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
+    <Compile Include="Controllers\UserAudioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,7 +222,18 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ScoreViewModel.cs" />
     <Compile Include="Models\TrackViewModel.cs" />
+    <Compile Include="Models\UserAudioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\HomeTexts.fr.Designer.cs">
+      <DependentUpon>HomeTexts.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\HomeTexts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeTexts.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Admin\css\AdminLTE.css" />
@@ -6186,6 +6200,7 @@
     <Content Include="Assets\Client\js\canvasjs.min.js" />
     <Content Include="Assets\Client\js\controllers\listAudio.js" />
     <Content Include="Assets\Client\js\controllers\playAudio.js" />
+    <Content Include="Assets\Client\js\controllers\userAudio.js" />
     <Content Include="Assets\Client\js\jquery.twbsPagination.min.js" />
     <Content Include="Assets\Client\pagead2.googlesyndication.com\pagead\js\f.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -6539,12 +6554,17 @@
     <Content Include="Views\Audio\Choose.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\UserAudio\Index.cshtml" />
+    <Content Include="Views\UserAudio\Create.cshtml" />
+    <Content Include="Views\UserAudio\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\libs\mustache\bin\" />
     <Folder Include="Infrastructure\Core\" />
     <Folder Include="Upload\" />
+    <Folder Include="UserUpload\" />
+    <Folder Include="Views\Language\" />
     <Folder Include="Views\Score\" />
     <Folder Include="Views\Track\" />
   </ItemGroup>
@@ -6584,6 +6604,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\HomeTexts.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeTexts.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\HomeTexts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeTexts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -15,13 +15,7 @@
         <div data-sticky_column>
             <div class="m-post-content m-post-content--tok">
                 <div class="post-top">
-                    <div class="breadcrumbs u-margin-b-10">
-                        <span><a href="https://www.listen-and-write.com/">Home</a></span>
-                        <span class="separetor">-</span>
-                        <span><a href="https://www.listen-and-write.com/audio/choose/16584">Full Mode</a></span>
-                        <span class="separetor">-</span>
-                        <span class="current">@Model.AudioTitle</span>
-                    </div>
+                    
                     <h1 class="post-title">
                         <table>
                             <tr>
@@ -56,7 +50,7 @@
                             <div id="sentence_list">
 
                                 <div>
-                                    <i style="padding: 0px 15px;">Track</i> : <input id="btn-prev" type=button value="<" class="btn-prev" />
+                                    <i style="padding: 0px 15px;">@ListenAndWrite.Web.Resources.HomeTexts.Track</i> : <input id="btn-prev" type=button value="<" class="btn-prev" />
                                     <span id="currentTrack">1</span>
                                     of <span id="numTrack">@Model.NumTrack</span>
                                     <input id="btn-next" type=button value=">" class="btn-next" />
@@ -75,24 +69,24 @@
                                                     </div>
                                                     <div class="form-group text-center">
                                                         <button class="btn btn-primary btn-lg" id="btn-play">
-                                                            <span class="glyphicon glyphicon-play"></span>Play
+                                                            <span class="glyphicon glyphicon-play"></span>@ListenAndWrite.Web.Resources.HomeTexts.Play
                                                         </button>
                                                         <div class="btn btn-primary btn-lg btn-next" id="btn-next2">
-                                                            <span class="glyphicon glyphicon-plus"></span> Next track
+                                                            <span class="glyphicon glyphicon-plus"></span> @ListenAndWrite.Web.Resources.HomeTexts.NextTrack
                                                         </div>
                                                         <button class="btn btn-primary btn-lg" id="btn-score">
-                                                            <span class="glyphicon glyphicon-certificate"></span><span style="color: white">Final score</span>
+                                                            <span class="glyphicon glyphicon-certificate"></span><span style="color: white">@ListenAndWrite.Web.Resources.HomeTexts.FinalScore</span>
                                                         </button>
                                                         <h2 id="totalScore" style="color:red;"></h2>
                                                     </div>
 
                                                 </div>
-                                                <i class='button medium icon'><i class='delete'></i><button type='button' id="stop">Stop</button></i>
-                                                <i class='button medium icon'><i class='check'></i><button id="hint" type='button'>Hint</button></i>
+                                                <i class='button medium icon'><i class='delete'></i><button type='button' id="stop">@ListenAndWrite.Web.Resources.HomeTexts.Pause</button></i>
+                                                <i class='button medium icon'><i class='check'></i><button id="hint" type='button'>@ListenAndWrite.Web.Resources.HomeTexts.Hint</button></i>
                                                 <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
                                                 <div><textarea cols="38" rows="1" id="audioScript" style=""></textarea></div>
                                                 <div>
-                                                    <button id="submit" class="btn-success">Submit</button>
+                                                    <button id="submit" class="btn-success">@ListenAndWrite.Web.Resources.HomeTexts.Submit</button>
                                                 </div>
                         <p id="result"></p>
                         @if (Request.IsAuthenticated)
@@ -106,8 +100,8 @@
                             <center>
                                 <br />
                                 <h3>
-                                    Please login to save your score and to see your history. >>
-                                    <a href="/Account/Login/">Login</a>
+                                    @ListenAndWrite.Web.Resources.HomeTexts.PleaseLogin . >>
+                                    <a href="/Account/Login/">@ListenAndWrite.Web.Resources.HomeTexts.Login</a>
                                 </h3>
                                 <image src="https://www.listen-and-write.com/images/sample_scores2.png" alt="sample scores">
                             </center>
@@ -158,7 +152,7 @@
             </div>
         </div>  <!-- player2 -->
         <div class='command' style='width:100%;'>
-            &nbsp;<strong>Dictionary Lookup</strong><br />
+            &nbsp;<strong>Écouter et écrire</strong><br />
             <ul id="failedWord" style='display:inline-block;'></ul>
         </div>
 
@@ -169,10 +163,7 @@
         </p>
         <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div><br />
         <div id="myscore"></div>
-        <i class="fa fa-share-alt"></i> Embed this listen-and-write audio clip to your blog or site.<br />
-        <input id='embedcode' value='<iframe src="https://www.listen-and-write.com/audio/previeweshow/16584" width="510" height="340" frameborder="0" scrolling="no"></iframe>'
-               size=80 onClick='this.select();'><br />
-        Copy and paste the code above.
+        
 
     </div>
 </div>
@@ -190,7 +181,7 @@
 
         </div>
         <!-- trending news -->
-        <div class="widget widget--border-box cat-trending single-cat">
+        @*<div class="widget widget--border-box cat-trending single-cat">
             <div class="widget__title has-ajax-load">
                 <h4>Related Audios ... Level 11 <i class="fa fa-star-half-o"></i></h4>
             </div>
@@ -231,7 +222,7 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </div>*@
         <!-- banner -->
         <div class="widget widget--transparent-box img-banner">
             <figure>

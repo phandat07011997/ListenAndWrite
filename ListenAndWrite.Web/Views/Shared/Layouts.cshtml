@@ -93,13 +93,13 @@
                 <div class="row">
                     <div class="col-8 col-sm-6">
                         <ul class="header__status__items header__status__items--left">
-                            <li class="d-none d-xl-block d-lg-block" style="font-weight:bold">Welcome to listen-and-write</li>
+                            <li class="d-none d-xl-block d-lg-block" style="font-weight:bold">@ListenAndWrite.Web.Resources.HomeTexts.Language : @Html.ActionLink("VietNam", "Change", "Language", new { LanguageAbbrevation = "vi" }, null) | @Html.ActionLink("France", "Change", "Language", new { LanguageAbbrevation = "fr" }, null)</li>
                         </ul>
                     </div>
                     <div class="col-4 col-sm-6">
                         <ul class="header__status__items header__status__items--right">
                             <li class="header__status__social d-none d-xl-block d-lg-block">
-                                <a href="../account/login71b2.html"><i class="fa fa-pencil-square-o"></i>Submit a new audio!</a>
+                                <a href="/UserAudio/Create"><i class="fa fa-pencil-square-o"></i>@ListenAndWrite.Web.Resources.HomeTexts.SubmitAudio</a>
                             </li>
                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                             {
@@ -111,16 +111,16 @@
                                     <i class="fa fa-address-book-o" aria-hidden="true"></i>@User.Identity.GetUserName()
                                 </li>
                                 <li class="header__status__social d-none d-xl-block d-lg-block">
-                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>Logout</a>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>@ListenAndWrite.Web.Resources.HomeTexts.Logout</a>
                                 </li>
                             }
                             else
                             {
                                 <li class="header__status__social d-none d-xl-block d-lg-block">
-                                    <a href="/Account/Register"><i class="fa fa-user-plus"></i>Sign Up</a>
+                                    <a href="/Account/Register"><i class="fa fa-user-plus"></i>@ListenAndWrite.Web.Resources.HomeTexts.SignUp</a>
                                 </li>
                                 <li class="header__status__login cursor-pointer">
-                                    <a href="/Account/Login"><i class="fa fa-lock" aria-hidden="true"></i>Login</a>
+                                    <a href="/Account/Login"><i class="fa fa-lock" aria-hidden="true"></i>@ListenAndWrite.Web.Resources.HomeTexts.Login</a>
                                 </li>
                             }
 
@@ -147,24 +147,9 @@
                         <div class="col-md-11 col-6">
                             <nav class="header__nav text-left has-bg d-none d-lg-block">
                                 <ul>
-                                    <li><a href="../audio.html">Home</a></li>
-                                    <li><a href="level.html">Audios</a></li>
-                                    <li><a href="../youtube.html">Youtube</a></li>
-                                    <li><a href="../account/login8ab7.html">Level Test</a></li>
-                                    <li><a href="../account/login0865.html">Groups</a></li>
-                                    <li><a href="../play.html">Numbers</a></li>
-                                    <li class="has-dropdown">
-                                        <a href="#">My Account</a>
-                                        <ul class="menu-dropdown">
-                                            <li class="active"><a href="../account/login84c4.html">Review</a></li>
-                                            <li class="active"><a href="../account/login6583.html">History</a></li>
-                                            <li><a href="../account/login94a8.html">My upload audios</a></li>
-                                            <li><a href="../account/login83b7.html">My Score (Full)</a></li>
-                                            <li><a href="../account/login643e.html">My Score (Quick)</a></li>
-                                            <li><a href="../account/login0b41.html">My Account</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="archive.html">Archive</a></li>
+                                    <li><a href="/Home/Index">@ListenAndWrite.Web.Resources.HomeTexts.HomePage</a></li>
+                                    <li><a href="/UserAudio/Index">@ListenAndWrite.Web.Resources.HomeTexts.MyAudio</a></li>
+                                    
                                 </ul>
                             </nav>
                             <button id="JS-openButton" class="cursor-pointer header__menubar header__menubar-light d-lg-none d-xl-none"><i class="ico-bar"></i></button>
@@ -208,7 +193,7 @@
         </div>
         <nav class="mobile-menu">
             <ul>
-                <li><a class="no-child" href="../index.html">Home</a></li>
+                <li><a class="no-child" href="/Home/Index">Home</a></li>
                 <li><a class="no-child" href="level.html">Levels</a></li>
                 <li><a class="no-child" href="../youtube.html">Youtube</a></li>
                 <li><a class="no-child" href="../account/login8ab7.html">Level Test</a></li>
@@ -217,17 +202,7 @@
             </ul>
         </nav>
     </div><!--// Mobile menu area end -->
-    <center>
-        <script async src="~/Assets/Client/pagead2.googlesyndication.com/pagead/js/f.txt"></script>
-        <!-- 728-90Ad -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-0119806589085646"
-             data-ad-slot="9628877441"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </center>
+    
     <section class="has-sidebar u-padding-t-50 u-padding-b-80">
         <div class="container">
             @RenderBody()
@@ -248,7 +223,7 @@
     <section class="full-width link-widgets u-padding-t-80 u-padding-b-80">
         <div class="container">
             <div class="widgets-inner">
-                <div class="c-col">
+                @*<div class="c-col">
                     <div class="widget widget--transparent-box">
                         <div class="widget__title">
                             <h4>Category 1</h4>
@@ -316,7 +291,7 @@
                             <li><a href="../account/login643e.html">My Score (Quick)</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </section>
@@ -367,7 +342,7 @@
         <div class="footer__end footer__end--dark">
             <div class="container">
                 <div class="footer__copyright u-padding-t-15">
-                    <p class="u-font13">© 2018 Listen-and-Write.com</p>
+                    <p class="u-font13"></p>
                 </div>
             </div>
         </div>
