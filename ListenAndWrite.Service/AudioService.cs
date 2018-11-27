@@ -23,7 +23,7 @@ namespace ListenAndWrite.Service
 
         IEnumerable<Audio> GetLastestAudio(int page, int pageSize, out int totalRow);
 
-        IEnumerable<Audio> GetLastestActiveAudio(int? level, int page, int pageSize, out int totalRow);
+        IEnumerable<Audio> GetLastestActiveAudio(string search,int? level, int page, int pageSize, out int totalRow);
 
         IEnumerable<Audio> GetListAudioByLevel(int level, int page, int pageSize, out int totalRow);
 
@@ -63,9 +63,13 @@ namespace ListenAndWrite.Service
             return _audioRepository.GetSingleById(id);
         }
 
-        public IEnumerable<Audio> GetLastestActiveAudio(int? level, int page, int pageSize, out int totalRow)
+        public IEnumerable<Audio> GetLastestActiveAudio(string search,int? level, int page, int pageSize, out int totalRow)
         {
             var query = (level != null) ? _audioRepository.GetMulti(x => x.Status == true && x.Level == level).OrderByDescending(y => y.CreatedDate) : _audioRepository.GetMulti(x => x.Status == true).OrderByDescending(y => y.CreatedDate);
+            if(search!=null)
+            {
+                query = query.Where(x => x.AudioTitle.ToLower().Contains(search.ToLower())).OrderByDescending(y => y.CreatedDate);
+            }
             totalRow = query.Count();
             return query.Skip((page - 1) * pageSize).Take(pageSize);
         }

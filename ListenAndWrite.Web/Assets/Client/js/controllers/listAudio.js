@@ -8,7 +8,7 @@ var listAudio = {
         listAudio.registerEvents();
     },
     registerEvents: function () {
-        
+
     },
     loadData: function () {
         $.ajax({
@@ -18,7 +18,8 @@ var listAudio = {
             data: {
                 level: $('#level').val(),
                 page: config.pageIndex,
-                pageSize: config.pageSize
+                pageSize: config.pageSize,
+                search: $('#searchContent').val()
             },
             success: function (response) {
                 if (response.TotalCount > 0) {
@@ -35,7 +36,7 @@ var listAudio = {
                             seconds = "0" + item.Duration % 60;
                         else
                             seconds = item.Duration % 60;
-                        
+
                         var myDate = new Date(item.CreatedDate.match(/\d+/)[0] * 1);
                         html += Mustache.render(template, {
                             AudioTitle: item.AudioTitle,
@@ -43,7 +44,7 @@ var listAudio = {
                             Level: item.Level,
                             Duration: minutes + ":" + seconds,
                             Id: item.Id
-                            });
+                        });
                     });
                     $('.archive-posts').html(html);
                     listAudio.paging(response.TotalCount, function () {

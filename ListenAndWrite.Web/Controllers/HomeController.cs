@@ -16,9 +16,10 @@ namespace ListenAndWrite.Web.Controllers
             this._audioService = audioService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             var listLevel = _audioService.GetListLevel();
+            ViewBag.SearchContent = search;
             return View(listLevel);
         }
 

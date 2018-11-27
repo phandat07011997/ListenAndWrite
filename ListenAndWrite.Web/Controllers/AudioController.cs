@@ -33,10 +33,10 @@ namespace ListenAndWrite.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadAudio(int page, int pageSize, int? level)
+        public JsonResult LoadAudio(int page, int pageSize, int? level,string search)
         {
             int totalRow = 0;
-            var audioModel = _audioService.GetLastestActiveAudio(level, page, pageSize, out totalRow);
+            var audioModel = _audioService.GetLastestActiveAudio(search,level, page, pageSize, out totalRow);
             var audioViewModel = Mapper.Map<IEnumerable<Audio>, IEnumerable<AudioViewModel>>(audioModel);
             return Json(new
             {

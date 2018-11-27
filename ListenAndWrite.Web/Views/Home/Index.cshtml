@@ -17,7 +17,10 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 }
-
+@if (ViewBag.SearchContent != null)
+{
+    <input type="hidden" value="@ViewBag.SearchContent" id="searchContent" />
+}
 <div class="row" data-sticky_parent="">
     <div class="col-lg-8 content-wrapper">
         <div class="posts-box3 archive-box">
