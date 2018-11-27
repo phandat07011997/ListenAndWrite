@@ -13,7 +13,7 @@ namespace ListenAndWrite.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201811271443433_Initial"; }
+            get { return "201811271544221_Initial"; }
         }
         
         string IMigrationMetadata.Source

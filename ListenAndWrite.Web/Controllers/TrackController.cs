@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ListenAndWrite.Common;
 using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
 using ListenAndWrite.Web.Models;
@@ -23,7 +24,6 @@ namespace ListenAndWrite.Web.Controllers
         public JsonResult LoadTrack(int audioId, int track)
         {
             var trackModel = _trackService.GetTrackByAudioId(track, audioId);
-            trackModel.Answer = trackModel.Answer.Trim();
             var trackVM = Mapper.Map<Track, TrackViewModel>(trackModel);
             return Json(new
             {

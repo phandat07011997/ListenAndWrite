@@ -8,18 +8,27 @@
     <link href="~/Assets/Client/kendo/styles/kendo.blueopal.min.css" rel="stylesheet" />
     <script src="~/Assets/Client/kendo/js/kendo.all.min.js"></script>
     @*<script src="~/Assets/Admin/js/controllers/addTrack.js"></script>*@
-    
+
 
     <script>
 var track = {
     init: function () {
         track.initGrid();
-
+        track.registerEvent();
+    },
+    registerEvent: function () {
+        var audio = document.getElementById("audio-element");
+        audio.onpause = function () {
+            alert("Current time : " +audio.currentTime);
+            $('#currentTime').html("");
+            $('#currentTime').html("Current time : " + audio.currentTime);
+        };
+        
     },
     initGrid: function () {
         dataSource = new kendo.data.DataSource({
             requestEnd: function (e) {
-                
+
                 if ((e.type === "create"||e.type === "update" || e.type === "destroy") && e.response) {
                     $('#grid').data('kendoGrid').dataSource.read();
 
@@ -64,14 +73,14 @@ var track = {
 
                         //return result;
                         return JSON.stringify({ tracks: data.models.slice(0,1), audioId: $('#audioId').val() })
-                        
+
                     } else {
                         return JSON.stringify(data)
                     }
                 }
             },
             batch: true,
-            pageSize: 20,
+            pageSize: 10,
             schema: {
                 data: "Data",
                 total: "Total",
@@ -93,7 +102,7 @@ var track = {
             pageable: true,
             sortable: true,
             filterable: true,
-            height: 550,
+            height: 520,
             toolbar: ["create"],
             columns: [
                 "Order",
@@ -147,11 +156,13 @@ track.init();
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <audio controls loop>
+                    <audio id="audio-element" controls loop>
                         <source src="@Model.Path" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
+                
+                <h3 id="currentTime"></h3>
             </div>
             <div class="row">
                 <div id="grid"></div>

@@ -54,7 +54,7 @@ namespace ListenAndWrite.Service
 
         public IEnumerable<Track> GetListTrackByAudioId(int audioId)
         {
-            return _trackRepository.GetMulti(x => x.AudioId == audioId).OrderBy(y => y.TimeStart);
+            return _trackRepository.GetMulti(x => x.AudioId == audioId).OrderBy(y => y.Order);
         }
 
         public Track GetTrackByAudioId(int order, int audioId)

@@ -65,9 +65,9 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="ListenAndWriteDbContext.cs" />
-    <Compile Include="Migrations\201811271443433_Initial.cs" />
-    <Compile Include="Migrations\201811271443433_Initial.Designer.cs">
-      <DependentUpon>201811271443433_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201811271544221_Initial.cs" />
+    <Compile Include="Migrations\201811271544221_Initial.Designer.cs">
+      <DependentUpon>201811271544221_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,8 +90,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811271443433_Initial.resx">
-      <DependentUpon>201811271443433_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811271544221_Initial.resx">
+      <DependentUpon>201811271544221_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

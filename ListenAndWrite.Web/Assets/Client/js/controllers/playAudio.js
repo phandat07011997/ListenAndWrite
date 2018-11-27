@@ -352,7 +352,7 @@ var audio = {
 
 
         }
-        audio.compareInput(fixedWords.join(" "), answer);
+        audio.compareInput(fixedWords.join(" "), audio.removeSpace(answer));
         var listIWords = finalInput.toLowerCase().split(" ");
         var listWords = sameWords.split(" ");
         var i = 0;
