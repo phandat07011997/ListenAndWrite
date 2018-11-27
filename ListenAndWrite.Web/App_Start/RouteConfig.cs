@@ -19,6 +19,12 @@ namespace ListenAndWrite.Web
                 defaults: new { controller = "Audio", action = "Choose", id = UrlParameter.Optional },
                 namespaces: new string[] { "ListenAndWrite.Web.Controllers" }
             );
+            routes.MapRoute(
+                name: "Track",
+                url: "Admin/{action}/",
+                defaults: new { controller = "Admin", action = "Index"},
+                namespaces: new string[] { "ListenAndWrite.Web.Controllers" }
+            );
             //routes.MapRoute(
             //    name: "Level",
             //    url: "audio/level/{level}",

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Kendo.DynamicLinq;
+using Kendo.Mvc.Extensions;
 using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
 using ListenAndWrite.Web.Infrastructure.Extensions;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace ListenAndWrite.Web.Controllers
 {
@@ -54,16 +57,49 @@ namespace ListenAndWrite.Web.Controllers
             return View(audioViewModel);
         }
 
-        public JsonResult GetTracks(int audioId)
+        public ActionResult GetTracks(int audioId,int take, int skip, IEnumerable<Sort> sort, Kendo.DynamicLinq.Filter filter)
         {
+            IQueryable<Track> result = _trackService.GetListTrackByAudioId(audioId).AsQueryable();
+
+
             return Json(
-                    new
-                    {
-                        status = true,
-                        data = _trackService.GetListTrackByAudioId(audioId)
-                    }, JsonRequestBehavior.AllowGet
-                    );
+                result.ToDataSourceResult(take, skip, sort, filter), JsonRequestBehavior.AllowGet
+                );
+
         }
+        public void DeleteTrack(IEnumerable<TrackViewModel> tracks)
+        {
+            foreach (var track in tracks)
+            {
+                Track model = new Track();
+                model.UpdateTrack(track);
+                _trackService.Delete(model.Id);
+            }
+            _trackService.Save();
+        }
+        
+        public void UpdateTrack(IEnumerable<TrackViewModel> tracks)
+        {
+            foreach(var track in tracks)
+            {
+                Track model = new Track();
+                model.UpdateTrack(track);
+                _trackService.Update(model);
+            }
+            _trackService.Save();
+        }
+        public void CreateTrack(IEnumerable<TrackViewModel> tracks,int audioId)
+        {
+            foreach (var track in tracks)
+            {
+                Track model = new Track();
+                model.UpdateTrack(track);
+                model.AudioId = audioId;
+                _trackService.Add(model);
+            }
+            _trackService.Save();
+        }
+
         public JsonResult SaveTrack(Track track)
         {
             var num = _trackService.GetListTrackByAudioId(track.AudioId).Count() + 1;

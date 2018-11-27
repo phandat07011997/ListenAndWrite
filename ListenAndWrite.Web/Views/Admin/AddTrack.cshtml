@@ -4,11 +4,114 @@
     Layout = "~/Views/Shared/AdminLayouts.cshtml";
 }
 @section footerJS{
-    <script src="~/Assets/Admin/libs/jquery-ui/jquery-ui.js"></script>
-    <link href="~/Assets/Admin/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
-    <script src="~/Assets/Admin/js/controllers/addTrack.js"></script>
+    <link href="~/Assets/Client/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Assets/Client/kendo/styles/kendo.blueopal.min.css" rel="stylesheet" />
+    <script src="~/Assets/Client/kendo/js/kendo.all.min.js"></script>
+    @*<script src="~/Assets/Admin/js/controllers/addTrack.js"></script>*@
     
+
+    <script>
+var track = {
+    init: function () {
+        track.initGrid();
+
+    },
+    initGrid: function () {
+        dataSource = new kendo.data.DataSource({
+            requestEnd: function (e) {
+                
+                if ((e.type === "create"||e.type === "update" || e.type === "destroy") && e.response) {
+                    var grid = $("#grid").data("kendoGrid");
+                    grid.refresh();
+                    $("#grid").data('kendoGrid').dataSource.read();
+
+                }
+            },
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            transport: {
+                read: {
+                    url: "@Url.Action("GetTracks", "Admin",new { audioId = Model.Id })",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                update: {
+                    url: "/Admin/UpdateTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                destroy: {
+                    url: "/Admin/DeleteTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                create: {
+                    url: "/Admin/CreateTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                parameterMap: function (data, operation) {
+                    if (operation != "read") {
+                        //var result = {};
+
+                        //for (var i = 0; i < data.models.length; i++) {
+                        //    var track = data.models[i];
+
+                        //    for (var member in track) {
+                        //        result["tracks[" + i + "]." + member] = track[member];
+                        //    }
+                        //}
+
+                        //return result;
+                        return JSON.stringify({ tracks: data.models.slice(0,1), audioId: $('#audioId').val() })
+                        
+                    } else {
+                        return JSON.stringify(data)
+                    }
+                }
+            },
+            batch: true,
+            pageSize: 20,
+            schema: {
+                data: "Data",
+                total: "Total",
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false, nullable: true },
+                        Order: { type: "number", validation: { min: 1, required: true } },
+                        Answer: { type: "string", validation: { required: true } },
+                        TimeStart: { type: "number", validation: { min: 0, required: true } },
+                        Duration: { type: "number", validation: { min: 0, required: true } }
+                    }
+                }
+            }
+        });
+        $("#grid").kendoGrid({
+            dataSource: dataSource,
+            editable: true, // enable editing
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            height: 550,
+            toolbar: ["create"],
+            columns: [
+                "Order",
+                { field: "Answer", title: "Answer", width: "55%" },
+                { field: "TimeStart", title: "TimeStart", width: "10%" },
+                { field: "Duration", title: "Duration", width: "10%" },
+                { command: ["edit", "destroy"], title: "Action", width: "15%" }],
+            editable: "inline"
+        });
+    },
+
 }
+track.init();
+    </script>
+
+}
+
 <section class="content-header">
     <h1>
         Audio
@@ -52,50 +155,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <input class="btn btn-success" type="button" id="btnAddTrack" value="Add new track" />
-                    <input class="btn btn-danger" type="button" id="btnClearTrack" value="Clear all" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="dialog">
-                        <table>
-                            <tr>
-                                <td>Time start</td>
-                            </tr>
-                            <tr>
-                                <td><input type="number" id="txtTimeStart" /></td>
-                            </tr>
-                            <tr>
-                                <td>Duration</td>
-                            </tr>
-                            <tr>
-                                <td><input type="number" id="txtDuration" /></td>
-                            </tr>
-                            <tr>
-                                <td>Answer</td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" id="txtAnswer" /></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover" id="tracks">
-                            <thead>
-                                <tr>
-                                    <th>Order</th>
-                                    <th>Time start</th>
-                                    <th>Duration</th>
-                                    <th>Answer</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                        <br />
-                    </div>
-                </div>
+                <div id="grid"></div>
 
 
             </div>

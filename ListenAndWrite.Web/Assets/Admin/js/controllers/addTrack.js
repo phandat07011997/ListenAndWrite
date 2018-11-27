@@ -1,92 +1,96 @@
-﻿var track = {
+﻿
+var track = {
     init: function () {
-        track.initDialog();
-        track.registerEvent();
-        track.loadTracks();
+        track.initGrid();
+
     },
-    initDialog: function () {
-        $('#dialog').dialog({
-            autoOpen: false,
-            modal: true,
-            buttons: {
-                'Create': track.createTrack,
-                'Cancel': function () {
-                    $('#dialog').dialog('close');
-                    track.clearInputFields();
+    initGrid: function () {
+        dataSource = new kendo.data.DataSource({
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
+            transport: {
+                read: {
+                    url: "@Url.Action("GetTracks", "Admin",new { audioId = Model.Id })",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                update: {
+                    url: "/Admin/UpdateTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                destroy: {
+                    url: "/Admin/DeleteTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                create: {
+                    url: "/Admin/CreateTrack",
+                    contentType: "application/json",
+                    type: "POST"
+                },
+                parameterMap: function (data, operation) {
+                    if (operation != "read") {
+                        // post the products so the ASP.NET DefaultModelBinder will understand them:
+                        // products[0].Name="name"
+                        // products[0].ProductID =1
+                        // products[1].Name="name"
+                        // products[1].ProductID =1
+                        //var result = {};
+                        //for (var i = 0; i < data.models.length; i++) {
+                        //    var product = data.models[i];
+                        //    for (var member in product) {
+                        //        result["products[" + i + "]." + member] = product[member];
+                        //    }
+                        //}
+                        //return result;
+                        return JSON.stringify({ tracks: data.models, audioId: $('#audioId').val() })
+                    } else {
+                        return JSON.stringify(data)
+                    }
+                }
+            },
+            batch: true,
+            pageSize: 20,
+            schema: {
+                data: "Data",
+                total: "Total",
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false, nullable: true },
+                        Order: { type: "number", validation: { min: 1, required: true } },
+                        Answer: { type: "string", validation: { required: true } },
+                        TimeStart: { type: "number", validation: { min: 0, required: true } },
+                        Duration: { type: "number", validation: { min: 0, required: true } }
+                    }
                 }
             }
         });
-    },
-    registerEvent: function () {
-        $('#btnAddTrack').click(function () {
-            $('#dialog').dialog("open");
-        });
-        $('#btnClearTrack').click(function () {
-            var r = confirm("Clear all track ?");
-            if (r == true) {
-                track.clearTrack();
-            }
+        $("#grid").kendoGrid({
+            requestEnd: function (e) {
+                if ((e.type === "update" || e.type === "destroy") && e.response) {
+                    $("#grid").data('kendoGrid').dataSource.read();
 
-        });
-    },
-    clearTrack:function(){
-        $.ajax({
-            url: '/Admin/ClearTrack',
-            data: {
-                audioId: $('#audioId').val()
+                }
             },
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function () {
-                track.loadTracks();
-            }
+            dataSource: dataSource,
+            editable: true, // enable editing
+            pageable: true,
+            sortable: true,
+            filterable: true,
+            height: 550,
+            toolbar: ["create"],
+            columns: [
+                "Order",
+                { field: "Answer", title: "Answer", width: "55%" },
+                { field: "TimeStart", title: "TimeStart", width: "10%" },
+                { field: "Duration", title: "Duration", width: "10%" },
+                { command: ["edit", "destroy"], title: "Action", width: "15%" }],
+            editable: "inline"
         });
     },
-    createTrack: function () {
-        var emp = {};
-        emp.AudioId = $('#audioId').val();
-        emp.TimeStart = $('#txtTimeStart').val();
-        emp.Duration = $('#txtDuration').val();
-        emp.Answer = $('#txtAnswer').val();
 
-        $.ajax({
-            url: '/Admin/SaveTrack',
-            method: 'post',
-            data: '{ track:' + JSON.stringify(emp) + '}',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function () {
-                track.loadTracks();
-                $('#dialog').dialog('close');
-                track.clearInputFields();
-            }
-        });
-    },
-    loadTracks: function () {
-        var tboby = $('#tracks tbody');
-        tboby.empty();
-        $.ajax({
-            url: '/Admin/GetTracks',
-            dataType: 'json',
-            data: {
-                audioId: $('#audioId').val()
-            },
-            success: function (response) {
-                var data = response.data;
-                $(data).each(function () {
-                    var tr = $('<tr></tr>')
-                    tr.append('<td>' + this.Order + '</td>')
-                    tr.append('<td>' + this.TimeStart + '</td>')
-                    tr.append('<td>' + this.Duration + '</td>')
-                    tr.append('<td>' + this.Answer + '</td>')
-                    tboby.append(tr);
-                })
-            }
-        });
-    },
-    clearInputFields: function () {
-        $('#dialog input[type="text"]').val('');
-        $('#dialog input[type="number"]').val('');
-    },
 }
 track.init();
