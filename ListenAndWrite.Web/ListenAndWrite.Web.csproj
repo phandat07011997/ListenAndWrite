@@ -233,6 +233,11 @@
     <Compile Include="Models\TrackViewModel.cs" />
     <Compile Include="Models\UserAudioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\HomeTexts.vi.Designer.cs">
+      <DependentUpon>HomeTexts.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\HomeTexts.fr.Designer.cs">
       <DependentUpon>HomeTexts.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -9108,6 +9113,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\HomeTexts.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeTexts.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\HomeTexts.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeTexts.fr.Designer.cs</LastGenOutput>

@@ -145,7 +145,7 @@
     <value>Độ khó</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Đăng nhập Fake</value>
+    <value>Đăng nhập</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Đăng xuất</value>

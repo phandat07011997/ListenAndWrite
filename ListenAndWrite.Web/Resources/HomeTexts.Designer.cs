@@ -142,7 +142,7 @@ namespace ListenAndWrite.Web.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Đăng nhập.
+        ///   Looks up a localized string similar to Đăng nhập Fake.
         /// </summary>
         public static string Login {
             get {
