@@ -256,7 +256,7 @@ var audio = {
         score = answer.split(" ").length;
         if (scores[currTrack - 1] != undefined) {
             $("#submit").attr('disabled', 'disabled');
-            $('#result').append("<span style=\"color:blue;\">You have answered this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + scores[currTrack - 1] * 10 + "/10</span>");
+            $('#result').append("<span style=\"color:blue;\">You have answered this question</span><br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Correct: <span style=\"color:blue;\">" + (scores[currTrack - 1] * 100).toFixed(2)+ " %</span>");
         }
         if (currTrack == numTrack)          // nếu làm đến câu cuối thì hiện nút xem điểm
             $('#btn-score').show();
@@ -448,7 +448,7 @@ var audio = {
         if (a < 0)
             a = 0;
         scores[currTrack - 1] = a;
-        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Point: <span style=\"color:blue;\">" + (scores[currTrack - 1] * 10).toFixed(2) + "/10</span>");
+        $('#result').append("<br/>Answer: <span style=\"color:blue;\">" + answer + "</span><br/>Correct: <span style=\"color:blue;\">" + (scores[currTrack - 1] * 100).toFixed(2) + " %</span>");
 
     },
     removeSpace: function (input) {
