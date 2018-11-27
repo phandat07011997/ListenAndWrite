@@ -17,7 +17,6 @@ namespace ListenAndWrite.Model.Models
         public int Order { get; set; }
 
         [Required]
-        [MaxLength(256)]
         public string Answer { get; set; }
 
         [Required]

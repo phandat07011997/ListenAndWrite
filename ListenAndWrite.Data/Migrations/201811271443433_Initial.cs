@@ -71,13 +71,26 @@ namespace ListenAndWrite.Data.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         AudioId = c.Int(nullable: false),
                         Order = c.Int(nullable: false),
-                        Answer = c.String(nullable: false, maxLength: 256),
+                        Answer = c.String(nullable: false),
                         TimeStart = c.Single(nullable: false),
                         Duration = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Audios", t => t.AudioId, cascadeDelete: true)
                 .Index(t => t.AudioId);
+            
+            CreateTable(
+                "dbo.UserAudios",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        AudioTitle = c.String(nullable: false, maxLength: 256),
+                        Path = c.String(nullable: false, maxLength: 256),
+                        CreatedDate = c.DateTime(nullable: false),
+                        Text = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ApplicationUsers",
@@ -144,6 +157,7 @@ namespace ListenAndWrite.Data.Migrations
             DropTable("dbo.IdentityUserLogins");
             DropTable("dbo.IdentityUserClaims");
             DropTable("dbo.ApplicationUsers");
+            DropTable("dbo.UserAudios");
             DropTable("dbo.Tracks");
             DropTable("dbo.Scores");
             DropTable("dbo.IdentityUserRoles");

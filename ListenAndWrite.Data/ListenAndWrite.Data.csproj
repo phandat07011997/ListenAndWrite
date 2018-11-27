@@ -65,17 +65,9 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="ListenAndWriteDbContext.cs" />
-    <Compile Include="Migrations\201811210135107_Initial.cs" />
-    <Compile Include="Migrations\201811210135107_Initial.Designer.cs">
-      <DependentUpon>201811210135107_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811210257219_AddUserAudio.cs" />
-    <Compile Include="Migrations\201811210257219_AddUserAudio.Designer.cs">
-      <DependentUpon>201811210257219_AddUserAudio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811210304375_AddUserAudio1.cs" />
-    <Compile Include="Migrations\201811210304375_AddUserAudio1.Designer.cs">
-      <DependentUpon>201811210304375_AddUserAudio1.cs</DependentUpon>
+    <Compile Include="Migrations\201811271443433_Initial.cs" />
+    <Compile Include="Migrations\201811271443433_Initial.Designer.cs">
+      <DependentUpon>201811271443433_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,14 +90,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811210135107_Initial.resx">
-      <DependentUpon>201811210135107_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811210257219_AddUserAudio.resx">
-      <DependentUpon>201811210257219_AddUserAudio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811210304375_AddUserAudio1.resx">
-      <DependentUpon>201811210304375_AddUserAudio1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811271443433_Initial.resx">
+      <DependentUpon>201811271443433_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

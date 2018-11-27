@@ -21,11 +21,10 @@ var track = {
             requestEnd: function (e) {
                 
                 if ((e.type === "create"||e.type === "update" || e.type === "destroy") && e.response) {
-                    var grid = $("#grid").data("kendoGrid");
-                    grid.refresh();
-                    $("#grid").data('kendoGrid').dataSource.read();
+                    $('#grid').data('kendoGrid').dataSource.read();
 
-                }
+                    $('#grid').data('kendoGrid').refresh();
+                                    }
             },
             serverPaging: true,
             serverFiltering: true,

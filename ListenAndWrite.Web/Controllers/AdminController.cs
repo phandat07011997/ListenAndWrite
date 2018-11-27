@@ -88,7 +88,7 @@ namespace ListenAndWrite.Web.Controllers
             }
             _trackService.Save();
         }
-        public void CreateTrack(IEnumerable<TrackViewModel> tracks,int audioId)
+        public IEnumerable<TrackViewModel> CreateTrack(IEnumerable<TrackViewModel> tracks,int audioId)
         {
             foreach (var track in tracks)
             {
@@ -98,6 +98,7 @@ namespace ListenAndWrite.Web.Controllers
                 _trackService.Add(model);
             }
             _trackService.Save();
+            return tracks;
         }
 
         public JsonResult SaveTrack(Track track)
