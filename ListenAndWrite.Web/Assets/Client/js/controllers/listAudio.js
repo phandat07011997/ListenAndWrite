@@ -1,5 +1,5 @@
 ﻿var config = {
-    pageSize: 10,
+    pageSize: 5,
     pageIndex: 1,
 }
 var listAudio = {
@@ -63,10 +63,10 @@ var listAudio = {
         var totalPage = Math.ceil(totalRow / config.pageSize);
         $('#pagination').twbsPagination({
             totalPages: totalPage,
-            first: "Đầu",
-            next: "Tiếp",
-            last: "Cuối",
-            prev: "Trước",
+            first: "<<",
+            next: ">",
+            last: ">>",
+            prev: "<",
             visiblePages: 10,
             onPageClick: function (event, page) {
                 config.pageIndex = page;

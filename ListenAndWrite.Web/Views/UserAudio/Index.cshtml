@@ -10,37 +10,37 @@
 
     <script src="~/Assets/Client/js/controllers/userAudio.js"></script>
 }
-<h2>My audio</h2>
+    <h2>@ListenAndWrite.Web.Resources.HomeTexts.MyAudio</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    @Html.ActionLink(@ListenAndWrite.Web.Resources.HomeTexts.SubmitAudio, "Create", null, new { @class = "btn btn-success" })
 </p>
 @if (Model.Count() == 0)
 {
-    <h1>Empty</h1>
+    <h1>@ListenAndWrite.Web.Resources.HomeTexts.Empty</h1>
 }
 else
 {
     <table class="table">
         <tr>
             <th>
-                Play
+                @ListenAndWrite.Web.Resources.HomeTexts.Play
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AudioTitle)
+                @ListenAndWrite.Web.Resources.HomeTexts.Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                @ListenAndWrite.Web.Resources.HomeTexts.CreatedDate
             </th>
             <th>
-                Action
+                @ListenAndWrite.Web.Resources.HomeTexts.Action
             </th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    <a class="btn btn-primary btn-play" data-path="@item.Path" data-text="@item.Text">Play</a>
+                    <a class="btn btn-primary btn-play" data-path="@item.Path" data-text="@item.Text">@ListenAndWrite.Web.Resources.HomeTexts.Play</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AudioTitle)
@@ -49,8 +49,8 @@ else
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this audio?');" })
+                    @Html.ActionLink(@ListenAndWrite.Web.Resources.HomeTexts.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink(@ListenAndWrite.Web.Resources.HomeTexts.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you wish to delete this audio?');" })
                 </td>
             </tr>
         }

@@ -1,25 +1,23 @@
 ﻿using AutoMapper;
-using ListenAndWrite.Common;
 using ListenAndWrite.Model.Models;
 using ListenAndWrite.Service;
 using ListenAndWrite.Web.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ListenAndWrite.Web.Controllers
 {
     public class TrackController : Controller
     {
-        IAudioService _audioService;
-        ITrackService _trackService;
-        public TrackController(ITrackService trackService,IAudioService audioService)
+        private IAudioService _audioService;
+        private ITrackService _trackService;
+
+        public TrackController(ITrackService trackService, IAudioService audioService)
         {
             this._audioService = audioService;
             this._trackService = trackService;
         }
+
         [HttpGet]
         public JsonResult LoadTrack(int audioId, int track)
         {
@@ -30,6 +28,7 @@ namespace ListenAndWrite.Web.Controllers
                 Item = trackVM,
             }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public JsonResult CompareInput(string input, string answer)
         {
@@ -63,13 +62,10 @@ namespace ListenAndWrite.Web.Controllers
             }
 
             String save = String.Join(" ", saves, 0, F[subStrs.Length, inputs.Length]);
-            
-            
+
             return Json(new
             {
                 SameWords = save
-
-              
             }, JsonRequestBehavior.AllowGet);
         }
     }

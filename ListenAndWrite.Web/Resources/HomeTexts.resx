@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Thao tác</value>
+  </data>
   <data name="BackToHome" xml:space="preserve">
     <value>Trở lại trang chủ</value>
   </data>
@@ -125,6 +128,18 @@
   </data>
   <data name="Create" xml:space="preserve">
     <value>Tạo tài khoản</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Không có dữ liệu</value>
   </data>
   <data name="FinalScore" xml:space="preserve">
     <value>Xem tổng điểm</value>
@@ -159,6 +174,9 @@
   <data name="Password" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
+  <data name="Path" xml:space="preserve">
+    <value>Đường dẫn</value>
+  </data>
   <data name="Pause" xml:space="preserve">
     <value>Dừng</value>
   </data>
@@ -176,6 +194,12 @@
   </data>
   <data name="SubmitAudio" xml:space="preserve">
     <value>Tải lên bài nghe của bạn</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Văn bản</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tiêu đề</value>
   </data>
   <data name="Track" xml:space="preserve">
     <value>Câu</value>
